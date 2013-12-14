@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  brand_id: 1
+  sub_category_id: 1
+  detail: MyText
+
+two:
+  brand_id: 1
+  sub_category_id: 1
+  detail: MyText

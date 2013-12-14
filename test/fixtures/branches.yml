@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  address: MyString
+  start_hour: 1
+  start_minute: 1
+  end_hour: 1
+  end_minute: 1
+  reference: MyText
+  has_parking: false
+  has_valet: false
+  longitude: 1.5
+  latitude: 1.5
+  altitude: 1.5
+  district_id: 1
+  brand_id: 1
+
+two:
+  address: MyString
+  start_hour: 1
+  start_minute: 1
+  end_hour: 1
+  end_minute: 1
+  reference: MyText
+  has_parking: false
+  has_valet: false
+  longitude: 1.5
+  latitude: 1.5
+  altitude: 1.5
+  district_id: 1
+  brand_id: 1
