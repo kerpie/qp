@@ -1,0 +1,51 @@
+.accordion-group
+	.accordion-heading
+		=link_to "#branch_#{br.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion2" } do
+			%i.icon-bookmark
+			= "Tienda #{index}"
+	.accordion-body.collapse{ id: "branch_#{br.id}"}
+		.accordion-inner
+			%ul
+				%li
+					%span
+						Dirección: 
+					= br.address
+				%li
+					%span
+						Referencia:
+					= br.reference
+				%li
+					%span
+						Tiene estacionamiento: 
+					= br.has_parking ? "Si" : "No"
+				%li
+					%span
+						Tiene valet parking:
+					= br.has_valet ? "Si" : "No"
+				%li
+					%span
+						Horario de atención:
+					= "#{br.start_hour}:#{br.start_minute} am - #{br.end_hour}:#{br.end_minute} pm"
+				%li
+					%span
+						Distrito:
+					= br.district.name
+				%li
+					%span
+						Ciudad:
+					= br.district.city.name
+				%li
+					%span
+						Latitud:
+					= br.latitude
+				%li
+					%span
+						Longitud:
+					= br.longitude
+				%li
+					%span
+						Altitud:
+					= br.altitude
+			.branch_options
+				=link_to "Editar", root_path, class: "btn"
+				=link_to "Eliminar", root_path, class: "btn btn-danger"

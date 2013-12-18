@@ -1,0 +1,64 @@
+/
+	- unless notice.nil? || notice.empty?
+		%p
+			=notice
+
+	%ul
+		%li
+			=link_to "Volver", coupons_path
+		%li
+			=link_to "Editar", edit_coupon_path(@coupon)
+		%li
+			=link_to "Borrar", @coupon, method: :delete, data: { confirm: "de veritaz?" }
+
+-unless @coupon.nil?
+	.page_container
+		%h6
+			=link_to "Tu cuponera virtual", "#"
+		.inner_content		
+			.row
+				.span4
+					%h3
+						=@coupon.name
+					%p
+						=@coupon.description
+					%h5
+						Mas datos
+					%ul.icons
+						%li
+							Inicio de Promocion: 
+							=@coupon.start_date.strftime("%d/%m/%y")
+						%li
+							Fin de Promocion:
+							=@coupon.end_date.strftime("%d/%m/%y")
+						%li
+							Descuento:
+							= sprintf("%.0f", @coupon.discount*100) + "%"
+						%li
+							Marca:
+							= @coupon.brand.name
+						%li
+							Disponibilidad de la promocion:
+							%br
+							%ul
+							- @coupon.branches.each do |branch|
+								%li 
+									= branch.district.name
+									%br
+					.pad25
+					/
+						Mostrar cupon previo y siguiente
+						=link_to "#" do
+							%i{class: "icon-double-angle-left icon-4x pull-left"}
+						=link_to "#" do
+							%i{class: "icon-double-angle-right icon-4x pull-left"}
+						.clear
+						.pad25
+				.span8{ style: "margin-top:14px;" }
+					=link_to "img/large/13.jpg", data:{ rel: "prettyPhoto[portfolio1]" } do
+						=image_tag "http://casosdemarketing.files.wordpress.com/2009/07/starbucks-21.jpg", alt: "", width: "700px", height: "525px"
+
+		-if brand_signed_in?
+			.coupon_options_for_brand
+				=link_to "Editar", edit_coupon_path(@coupon), class: 'btn'
+				=link_to "Borrar", @coupon, class: 'btn btn-danger', method: :delete, data: { confirm: "Una vez eliminado no podra recuperarse. Est seguro de continuar?" }

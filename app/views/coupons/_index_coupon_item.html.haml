@@ -1,0 +1,13 @@
+.span4.element.category01{ data: { category: "#{coupon.name}" } }
+	.hover_img
+		=image_tag "portfolio/1.jpg", alt: ""
+		%span.portfolio_zoom
+			=link_to "","img/portfolio/1.jpg", {data: {rel: "prettyPhoto[portfolio1]"}}
+		%span.portfolio_link
+			=link_to "View item", coupon
+	.item_description
+		=link_to coupon do
+			%b
+				=coupon.name
+		%br
+		= coupon.description

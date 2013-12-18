@@ -1,0 +1,55 @@
+%h1 
+	= current_brand.name
+
+- unless @branches.nil? || @branches.empty?
+	#accordion2.accordion
+		- @branches.each.with_index(1) do |br, index|
+			=render "branch_index_item", br: br, index: index
+
+#new_branch_for_this_brand
+	=link_to "Registrar nueva tienda", "#myModal", role: "button", class: "btn btn-primary", data: {toggle: "modal"}
+	=form_tag create_branch_path, :remote => true, id: "create_new_branch" do
+		#myModal.modal.hide.fade{ tabindex: "-1", role: "dialog", aria: {labelledby: "myModalLabel", hidden: "true"}}
+			.modal-header
+				%button{ type: "button", class: "close", data: {dismiss: "modal"},aria:{hidden: "true"}}
+					×
+				%h3#myModalLabel
+					Registrar nueva tienda
+			.modal-body
+				=hidden_field_tag "brand_id", current_brand.id
+				.new_branch_part
+					= label_tag "address", "Dirección: "
+					= text_field_tag "address"
+				.new_branch_part
+					= label_tag "reference", "Referencia: "
+					= text_area_tag "reference"
+				.new_branch_part
+					= label_tag "start_time", "Hora de Atencion: "
+					= attention_time :start 
+					%span#separator_dash -
+					= attention_time :end
+				.new_branch_part
+					= label_tag "has_parking","¿Tiene estacionamiento?"
+					= boolean_select "has_parking"
+				.new_branch_part
+					= label_tag "has_valet","¿Tiene valet parking? "
+					= boolean_select "has_valet"
+				.new_branch_part
+					=label_tag "city", "Ciudad: "
+					= select_tag "city", options_from_collection_for_select(City.all, :id, :name)
+				.new_branch_part
+					=label_tag "district_id", "Ciudad: "
+					= select_tag "district_id",option_groups_from_collection_for_select(City.all, :districts, :name, :id, :name)
+				.new_branch_part
+					= label_tag "longitude", "Longitud: "
+					= text_field_tag "longitude"
+				.new_branch_part
+					= label_tag "altitude", "Altitud: "
+					= text_field_tag "altitude"
+				.new_branch_part
+					= label_tag "latitude", "Latitud: "
+					= text_field_tag "latitude"
+			.modal-footer
+				%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+					Cancelar
+				=submit_tag "Guardar", class: "btn btn-primary"

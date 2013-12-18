@@ -1,3 +1,4 @@
+- type = 1
 /
 	header
 .header
@@ -9,16 +10,91 @@
 				.logo
 					=link_to root_path do 
 						QPON
-						%span.hue .
-			.span8
+						%span.hue 
+							=type
+			- if type == 0
 				/
-					menu
-				%nav#main_menu
-				.menu_wrap
-					%ul.nav.sf-menu
-						%li
-							=link_to "Home", root_path 
-						%li
-							=link_to "Categorías", root_path 
-						%li
-							=link_to "Iniciar Sesión", root_path 
+					Usuario Administrador
+				.span8
+					/
+						menu
+					%nav#main_menu
+					.menu_wrap
+						%ul.nav.sf-menu
+							%li.sub-menu
+								=link_to "Cupones", root_path 
+								%ul
+									%li
+										=link_to root_path do 
+											%span --
+											Listar cupones nuevos
+									%li
+										=link_to root_path do 
+											%span --
+											Publicar cupon
+									%li
+										=link_to root_path do 
+											%span --
+											Ver cupones pendientes de aprobacion
+							%li.sub-menu
+								=link_to "categorias", "javascript:{}"
+								%ul
+									%li
+										=link_to root_path do
+											%span --
+											Tipos de Cupones
+									%li
+										=link_to root_path do
+											%span --
+											Estados de los cupones
+									%li
+										=link_to root_path do
+											%span --
+											Ciudades
+							%li
+								=link_to "Cerrar Sesión", root_path 
+			- elsif brand_signed_in?
+				/
+					Usuario Tienda
+				.span8
+					/
+						menu
+					%nav#main_menu
+					.menu_wrap
+						%ul.nav.sf-menu
+							%li.sub-menu
+								=link_to "Cupones", coupons_path
+								%ul
+									%li
+										=link_to new_coupon_path do
+											%span --
+											Nuevo cupón
+									%li
+										=link_to saved_coupons_path(current_brand.id) do
+											%span --
+											Cupones guardados
+							%li
+								=link_to "Tiendas", branches_index_path(current_brand.id)
+							%li.sub-menu
+								=link_to "Cerrar sesión", destroy_brand_session_path, method: :delete
+								%ul
+									%li
+										=link_to edit_brand_registration_path do
+											%span --
+											Editar Perfil
+			- else
+				.span8
+					/
+						menu
+					%nav#main_menu
+					.menu_wrap
+						%ul.nav.sf-menu
+							%li
+								=link_to "Cupones vistos", root_path 
+							%li.sub-menu
+								=link_to "Iniciar sesión", "javascript:{}"
+								%ul
+									%li
+										=link_to new_brand_session_path do
+											%span --
+											Iniciar sesión como local comercial

@@ -1,0 +1,48 @@
+%h2.register_title
+  Editando datos de 
+  = (current_brand.name.nil? || current_brand.name.empty?) ? resource_name.to_s.humanize : current_brand.name
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+  =devise_error_messages!
+
+  .edit_brand_part
+    = f.label :name, "Nombre: "
+    = f.text_field :name
+
+  .edit_brand_part
+    = f.label :email, "Correo: "
+    = f.email_field :email, autofocus: true
+
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Actualmente esperando confirmacion de: 
+      =resource.unconfirmed_email
+
+  .edit_brand_part
+    = f.label :password do 
+      Contraseña: 
+      %i 
+        Deja en blanco si no quieres cambiarla
+    = f.password_field :password, :autocomplete => "off"
+
+  .edit_brand_part
+    = f.label :password_confirmation, "Confirmacion de contraseña"
+    = f.password_field :password_confirmation
+
+  .edit_brand_part
+    = f.label :current_password do
+      Contraseña actual:
+      %i 
+        (Necesitamos tu contraseña actual para confirmar los cambios)
+    = f.password_field :current_password
+
+  .submit_brand_part
+    = f.submit "Update"
+
+%h3
+  Cancelar mi cuenta
+
+%p
+  = button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete
+
+= link_to "Back", :back

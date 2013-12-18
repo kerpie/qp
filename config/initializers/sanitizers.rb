@@ -1,0 +1,1 @@
+require "#{Rails.application.root}/lib/brand_sanitizer.rb"

@@ -1,6 +1,20 @@
 Qp::Application.routes.draw do
 
-  root "pages#index"
+  get "sub_categories/index"
+  root "coupons#index"
+
+  devise_for :brands
+
+  #Category
+  resources :categories
+
+  #Coupons
+  get 'coupons/saved_coupons/:id' => "coupons#saved_coupons", as: :saved_coupons
+  resources :coupons
+
+  #Branches
+  get "branches/index/:id" => "branches#index", as: :branches_index
+  post "branches/create" => "branches#create", as: :create_branch
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

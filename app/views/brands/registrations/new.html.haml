@@ -1,0 +1,19 @@
+%h2.register_title 
+	Registrate y empieza a publicar cupones!
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+	= devise_error_messages!
+
+	.register_brand_part
+		= f.label :email, "Correo: "
+		= f.email_field :email, autofocus: true
+	.register_brand_part
+		= f.label :password, "Contraseña: "
+		= f.password_field :password
+	.register_brand_part
+		= f.label :password_confirmation, "Confirmar contraseña: "
+		= f.password_field :password_confirmation
+	.submit_brand_part
+		= f.submit "Sign up", class: "btn btn-primary"
+
+= render "brands/shared/links"

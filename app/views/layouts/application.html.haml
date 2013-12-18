@@ -37,6 +37,7 @@
 		= csrf_meta_tags
 		= stylesheet_link_tag    "application", media: "all"
 	%body
+		.system_message
 		.container
 			= render "layouts/header"
 			= yield

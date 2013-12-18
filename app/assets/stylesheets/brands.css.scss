@@ -1,0 +1,78 @@
+#error_explanation{
+	width: 70%;
+	margin: 0 auto 20px;
+	background: red;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px;
+	h2{
+		color: white;
+		padding: 0px;
+	}
+	ul li{
+		font-size: 15px;
+	}
+}
+
+.register_title{
+	text-align: center;
+	font-size: 30px;
+	padding: 10px;
+}
+
+#new_brand, #edit_brand{
+	.sign_in_brand_part, .register_brand_part, .edit_brand_part{
+		text-align: center;
+	}
+	.remember_part{
+		width: 15%;
+		text-align: center;
+		margin: 0 auto;
+		padding: 10px;
+		input[type=checkbox]{
+			float: left;
+		}
+	}
+	.submit_brand_part{
+		text-align: center;
+		input{
+			padding: 8px;
+			font-size: 15px;
+		}
+	}
+}
+
+#devise_options{
+	margin: 30px auto;
+	text-align: center;
+	a{
+		font-size: 16px;
+	}
+}
+
+.accordion-inner{
+	ul{
+		li{
+			span{
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+#create_new_branch{
+	.new_branch_part{
+		select.small-select{
+			width: 10%;
+		}
+		#separator_dash{
+			font-size: 20px;
+			font-weight: bold;
+			padding: 0 10px;
+			line-height: 2px;
+			position: relative;
+			top: -3px;
+		}
+	}	 
+}

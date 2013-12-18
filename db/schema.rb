@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214043708) do
+ActiveRecord::Schema.define(version: 20131218002907) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "branch_id"
@@ -42,7 +42,27 @@ ActiveRecord::Schema.define(version: 20131214043708) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",        default: 0,  null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
   end
+
+  add_index "brands", ["email"], name: "index_brands_on_email", unique: true
+  add_index "brands", ["reset_password_token"], name: "index_brands_on_reset_password_token", unique: true
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -86,6 +106,8 @@ ActiveRecord::Schema.define(version: 20131214043708) do
     t.integer  "coupon_state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "brand_id"
+    t.integer  "admin_id"
   end
 
   create_table "districts", force: true do |t|

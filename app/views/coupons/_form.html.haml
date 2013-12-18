@@ -1,0 +1,41 @@
+=form_for(@coupon) do |f|
+	- if @coupon.errors.any?
+		%ul
+			-@coupon.errors.full_messages.each do |msg|
+				%li
+					=msg
+	-if brand_signed_in?
+		=f.hidden_field "brand_id", value: current_brand.id
+	-elsif admin_signed_in?
+		=f.hidden_field "admin_id", value: current_admin.id
+	.part
+		=f.label :name, "Nombre: "
+		=f.text_field :name
+	.part
+		=f.label :description, "Descripcion: "
+		=f.text_area :description
+	.part
+		=f.label :start_date, "Fecha de inicio de promocion:"
+		=f.date_select :start_date, start_year: 2013
+	.part
+		=f.label :end_date, "Fecha de fin de promocion:"
+		=f.date_select :end_date, start_year: 2013
+	.part
+		=f.label :discount, "Descuento:"
+		=f.text_field :discount
+	.part
+		%h2
+			¿Dónde estará disponible este cupón?
+			= hidden_field_tag "coupon[branch_ids][]", nil
+		- current_brand.branches.each do |branch|
+			=check_box_tag "coupon[branch_ids][]", branch.id, @coupon.branch_ids.include?(branch.id), id: dom_id(branch)
+			=label_tag dom_id(branch), branch.district.name, class: "district_checkbox"
+			%br
+	.part
+		=f.label :coupon_type_id, "Tipo del cupon: "
+		=f.collection_select :coupon_type_id, CouponType.all, :id, :name
+	.part
+		=f.label :coupon_state_id, "Estado del cupon: "
+		=f.collection_select :coupon_state_id, CouponState.all, :id, :name
+	.part
+		=f.submit
