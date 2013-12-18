@@ -1,10 +1,9 @@
 %h1 
 	= current_brand.name
 
-- unless @branches.nil? || @branches.empty?
-	#accordion2.accordion
-		- @branches.each.with_index(1) do |br, index|
-			=render "branch_index_item", br: br, index: index
+#accordion2.accordion
+	- @branches.each.with_index(1) do |br, index|
+		=render "branch_index_item", br: br, index: index
 
 #new_branch_for_this_brand
 	=link_to "Registrar nueva tienda", "#myModal", role: "button", class: "btn btn-primary", data: {toggle: "modal"}
