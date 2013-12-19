@@ -13,3 +13,7 @@
 //= require_directory ./template
 //= require jquery_ujs
 //= require_directory .
+
+$(".close").click(function(){
+	$(this).parents(".system_message").hide();
+});
