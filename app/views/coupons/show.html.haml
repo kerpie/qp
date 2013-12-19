@@ -11,6 +11,8 @@
 		%li
 			=link_to "Borrar", @coupon, method: :delete, data: { confirm: "de veritaz?" }
 
+= @texto
+
 -unless @coupon.nil?
 	.page_container
 		%h6

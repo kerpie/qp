@@ -21,8 +21,8 @@
 	padding: 10px;
 }
 
-#new_brand, #edit_brand{
-	.sign_in_brand_part, .register_brand_part, .edit_brand_part{
+#new_brand, #edit_brand, #new_user, #edit_user{
+	.sign_in_brand_part, .register_brand_part, .edit_brand_part, .sign_in_user_part, .register_user_part, .edit_user_part{
 		text-align: center;
 	}
 	.remember_part{
@@ -34,7 +34,7 @@
 			float: left;
 		}
 	}
-	.submit_brand_part{
+	.submit_brand_part, .submit_user_part{
 		text-align: center;
 		input{
 			padding: 8px;

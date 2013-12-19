@@ -1,5 +1,6 @@
 Qp::Application.routes.draw do
 
+  devise_for :users
   get "sub_categories/index"
   root "coupons#index"
 
@@ -9,6 +10,7 @@ Qp::Application.routes.draw do
   resources :categories
 
   #Coupons
+  get 'coupons/history' => "coupons#history", as: :coupons_history
   get 'coupons/saved_coupons/:id' => "coupons#saved_coupons", as: :saved_coupons
   resources :coupons
 

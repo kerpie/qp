@@ -1,0 +1,17 @@
+.page_container
+	%h6
+		=link_to "Cupones vistos anteriormente", "#"
+	.inner_content
+		#options
+			%ul#filters.option-set{ data: {"option-key" => "filter"}}
+				%li
+					=link_to "All", "#filter", class: "selected", data: { option_value: "*" } 
+				- @coupon_types.each do |ct|
+					%li
+						=link_to ct.name, "#filter", data: { option_value: ct.name }
+			.clear
+		.row
+			.projects
+				- @coupons.each do |cp|
+					=render "index_coupon_item", coupon: cp
+			.clear

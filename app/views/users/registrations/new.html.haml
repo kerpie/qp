@@ -1,0 +1,22 @@
+%h2.register_title
+	Registrarse
+
+=form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+	= devise_error_messages!
+
+	.register_user_part
+		= f.label :email, "Correo: "
+		= f.email_field :email, autofocus: true
+
+	.register_user_part
+		= f.label :password, "Contraseña: "
+		= f.password_field :password
+
+	.register_user_part
+		= f.label :password_confirmation
+		= f.password_field :password_confirmation
+
+	.submit_user_part
+		= f.submit "Registrarse"
+
+= render "users/shared/links"

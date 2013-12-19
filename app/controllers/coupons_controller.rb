@@ -33,6 +33,9 @@ class CouponsController < ApplicationController
   end
 
   def show
+    if user_signed_in?
+      current_user.coupon_ids = @coupon.id
+    end
   end
 
   def edit
@@ -65,6 +68,11 @@ class CouponsController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+
+  def history
+    @coupon_types = CouponType.all
+    @coupons = current_user.coupons
   end
 
   private
