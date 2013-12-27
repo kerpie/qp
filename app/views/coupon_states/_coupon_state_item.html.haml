@@ -1,0 +1,9 @@
+%tr
+	%td
+		=index
+	%td
+		=cs.name
+	%td
+		=link_to "Editar", "#update_coupon_state_form", role: :button, data: {toggle: :modal, id: cs.id }, class: 'cs_update_link'
+	%td
+		=link_to "Eliminar", coupon_states_destroy_path(cs.id), remote: true, class: "cs_destroy_link"

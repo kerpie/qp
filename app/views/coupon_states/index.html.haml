@@ -1,0 +1,48 @@
+.page_container
+	%h6
+		=link_to "Tu cuponera virtual", "#"
+
+	%h1
+		Estados de los cupones
+
+	%table.table.table-striped#coupon_states_table
+		%tr
+			%th
+				\#
+			%th
+				Nombre
+			%th{colspan: 2}
+				Opciones
+		- @coupon_states.each.with_index(1) do |cs, index|
+			=render "coupon_state_item", cs: cs, index: index
+
+	=link_to "Crear nuevo estado", "#new_coupon_state_form", role: "button", class: "btn", data:{toggle: "modal"}
+
+=form_tag coupon_states_create_path, remote: true do
+	#new_coupon_state_form.modal.hide.fade{ tabindex: "-1", role: "dialog", aria: {labelledby: "myModalLabel", hidden: "true"}}
+		.modal-header
+			=button_tag "×", type: :button, class: :close, data: {dismiss: "modal"}, aria: {hidden: "true"}
+			%h3#myModalLabelModal 
+				Nuevo estado del cupon
+		.modal-body
+			.coupon_state_part
+				=label_tag :coupon_state_new_name, "Nombre: "
+				=text_field_tag :coupon_state_new_name
+		.modal-footer
+			=button_tag "Cerrar", id: "coupon_states_new_close_button",  class: "btn", data: {dismiss: "modal"}, aria: {hidden: "true"}
+			=submit_tag "Guardar cambios", class: "btn btn-primary" 
+
+=form_tag coupon_states_update_path, remote: true do
+	#update_coupon_state_form.modal.hide.fade{ tabindex: "-1", role: "dialog", aria: {labelledby: "myModalLabel", hidden: "true"}}
+		.modal-header
+			=button_tag "×", type: :button, class: :close, data: {dismiss: "modal"}, aria: {hidden: "true"}
+			%h3#myModalLabelModal 
+				Actualizar estado del cupon
+		.modal-body
+			=hidden_field_tag "cs_id", value: -1
+			.coupon_state_part
+				=label_tag :new_coupon_state_name, "Nuevo estado del cupón:"
+				=text_field_tag :new_coupon_state_name
+		.modal-footer
+			=button_tag "Cerrar", id: "coupon_states_update_close_button", class: "btn", data: {dismiss: "modal"}, aria: {hidden: "true"}
+			=submit_tag "Guardar cambios", class: "btn btn-primary" 

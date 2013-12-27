@@ -1,6 +1,5 @@
 Qp::Application.routes.draw do
 
-  get "districts/index"
   root "coupons#index"
 
   devise_for :admins
@@ -35,6 +34,12 @@ Qp::Application.routes.draw do
   get 'coupons/history' => "coupons#history", as: :coupons_history
   get 'coupons/saved_coupons/:id' => "coupons#saved_coupons", as: :saved_coupons
   resources :coupons
+
+  #Coupon States
+  get "coupon_states/index" => "coupon_states#index", as: :coupon_states_index
+  post "coupon_states/create" => "coupon_states#create", as: :coupon_states_create
+  get "coupon_states/destroy/:id" => "coupon_states#destroy", as: :coupon_states_destroy
+  post "coupon_states/update" => "coupon_states#update", as: :coupon_states_update
 
   #Branches
   get "branches/index/:id" => "branches#index", as: :branches_index
