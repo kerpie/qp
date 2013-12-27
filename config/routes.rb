@@ -41,6 +41,12 @@ Qp::Application.routes.draw do
   get "coupon_states/destroy/:id" => "coupon_states#destroy", as: :coupon_states_destroy
   post "coupon_states/update" => "coupon_states#update", as: :coupon_states_update
 
+  #Coupon Types
+  get "coupon_types/index" => "coupon_types#index", as: :coupon_types_index
+  post "coupon_types/create" => "coupon_types#create", as: :coupon_types_create
+  get "coupon_types/destroy/:id" => "coupon_types#destroy", as: :coupon_types_destroy
+  post "coupon_types/update" => "coupon_types#update", as: :coupon_types_update
+
   #Branches
   get "branches/index/:id" => "branches#index", as: :branches_index
   post "branches/create" => "branches#create", as: :create_branch
