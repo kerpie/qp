@@ -1,0 +1,52 @@
+.page_container
+	%h6
+		%a{href: "index.html"}
+			home
+		\/ ciudades
+	.inner_content
+		.row
+			.span3
+				%h4 Ciudades
+				#accordion3.accordion
+					- @cities.each do |ct|
+						= render "city_list_item", ct: ct
+				=link_to "Crear ciudad", "#new_city_form", class: "btn btn-warning", role: "button", data: {toggle: "modal"}
+			#district_total_content.span9
+				%h1
+					Listar ciudades
+				%p
+					%b
+						Elige una opción en la izquierda para mostrar los distritos
+
+=form_tag cities_create_path, remote: true do
+	#new_city_form.modal.hide.fade{tabindex: "-1", role: "dialog", aria:{ labelledby: "myModalLabel", hidden: "true"}}
+		.modal-header
+			%button.close{ id: "city_close_button", type: "button", data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				×
+			%h3
+				Nueva ciudad
+		.modal-body
+			.new_city_part
+				=label_tag :name, "Ciudad: "
+				=text_field_tag :name
+		.modal-footer
+			%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				Cancelar
+			=submit_tag "Guardar", class: "btn btn-primary"
+
+=form_tag cities_update_path, remote: true do
+	#update_city_form.modal.hide.fade{tabindex: "-1", role: "dialog", aria:{ labelledby: "myModalLabel", hidden: "true"}}
+		.modal-header
+			%button.close{ id: "update_city_close_button", type: "button", data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				×
+			%h3
+				Editar ciudad
+		.modal-body
+			=hidden_field_tag :city_id, value: -1
+			.new_category_part
+				=label_tag :new_name, "Ciudad: "
+				=text_field_tag :new_name
+		.modal-footer
+			%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				Cancelar
+			=submit_tag "Guardar", class: "btn btn-primary"

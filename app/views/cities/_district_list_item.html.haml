@@ -1,0 +1,31 @@
+-if uncomplete == true
+	%tr
+		%td
+			=index
+		%td
+			=dt.name
+		%td
+			=link_to "Editar", "#update_district_form", class: "up_district", role: "button", data: {toggle: "modal", id: "#{dt.id}"}
+		%td
+			= link_to "Eliminar", districts_destroy_path(dt.id), remote: true, class: "destroy_dt"
+-else
+	%h1
+		= districts.first.city.name.upcase
+	%table.table.table-striped
+		%tr
+			%th
+				\#
+			%th
+				Nombre
+			%th{colspan: "2"}
+				Opciones
+		- districts.each.with_index(1) do |dt, index|
+			%tr
+				%td
+					=index
+				%td
+					=dt.name
+				%td
+					Editar
+				%td
+					=link_to "Eliminar", districts_destroy_path(sb.id), remote: true, class: "destroy_dt"

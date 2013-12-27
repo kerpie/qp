@@ -1,0 +1,2 @@
+$(".accordion-toggle[data-id=#{@category.id}]").parents(".accordion-group").replaceWith("#{j render 'category_list_item', cat: @category}");
+$("#update_category_close_button").click();

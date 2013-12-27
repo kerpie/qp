@@ -17,3 +17,11 @@
 $(".close").click(function(){
 	$(this).parents(".system_message").hide();
 });
+
+if($(".system_message").html().length > 0){
+	setTimeout(hideMessage, 3000);
+}
+
+function hideMessage(){
+	$(".system_message").fadeOut(500);
+}

@@ -1,13 +1,35 @@
 Qp::Application.routes.draw do
 
-  devise_for :users
-  get "sub_categories/index"
+  get "districts/index"
   root "coupons#index"
 
+  devise_for :admins
+  devise_for :users
   devise_for :brands
 
   #Category
-  resources :categories
+  get 'categories/index' => "categories#index", as: :categories_index
+  get 'categories/show/:id' => "categories#show", as: :category_show
+  post 'categories/create' => "categories#create", as: :category_create
+  post 'categories/update' => "categories#update", as: :category_update
+  get 'categories/destroy/:id' => "categories#destroy", as: :category_destroy
+
+  #Subcategory
+  post 'sub_categories/create' => "sub_categories#create", as: :sub_categories_create
+  post 'sub_categories/update' => "sub_categories#update", as: :sub_categories_update
+  get 'sub_categories/destroy/:id' => "sub_categories#destroy", as: :sub_categories_destroy
+
+  #City
+  get "cities/index" => "cities#index", as: :cities_index
+  get 'cities/show/:id' => "cities#show", as: :cities_show
+  post 'cities/create' => "cities#create", as: :cities_create
+  post 'cities/update' => "cities#update", as: :cities_update
+  get 'cities/destroy/:id' => "cities#destroy", as: :cities_destroy
+
+  #District
+  post 'districts/create' => "districts#create", as: :districts_create
+  post 'districts/update' => "districts#update", as: :districts_update
+  get 'districts/destroy/:id' => "districts#destroy", as: :districts_destroy
 
   #Coupons
   get 'coupons/history' => "coupons#history", as: :coupons_history

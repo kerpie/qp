@@ -1,0 +1,50 @@
+#subcategory_content{class: @category.name.tr(" ", "_")}
+	%h1
+		= category.name.upcase
+	- unless subcategories.empty?
+		%table.table.table-striped
+			%tr
+				%th
+					\#
+				%th
+					Nombre
+				%th{colspan: "2"}
+					Opciones
+			- subcategories.each.with_index(1) do |sb, index|
+				= render "sub_category_list_item", sb: sb, index: index, uncomplete: true
+
+=link_to "Crear sub-categoria", "#new_sub_category_form", class: "btn btn-warning", role: "button", data: {toggle: "modal"}
+
+=form_tag sub_categories_create_path, remote: true do
+	#new_sub_category_form.modal.hide.fade{tabindex: "-1", role: "dialog", aria:{ labelledby: "myModalLabel", hidden: "true"}}
+		.modal-header
+			%button.close{ id: "close_button", type: "button", data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				×
+			%h3
+				Nueva Subcategoria
+		.modal-body
+			=hidden_field_tag :category_id, category.id
+			.new_category_part
+				=label_tag :name, "Categoria: "
+				=text_field_tag :name
+		.modal-footer
+			%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				Cancelar
+			=submit_tag "Guardar", class: "btn btn-primary"
+
+=form_tag sub_categories_update_path, remote: true do
+	#update_sub_category_form.modal.hide.fade{tabindex: "-1", role: "dialog", aria:{ labelledby: "myModalLabel", hidden: "true"}}
+		.modal-header
+			%button.close{ id: "close_button", type: "button", data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				×
+			%h3
+				Editar subcategoria
+		.modal-body
+			= hidden_field_tag :sub_cat_id, value: 0
+			.new_category_part
+				=label_tag :new_sub_name, "Nuevo nombre: "
+				=text_field_tag :new_sub_name
+		.modal-footer
+			%button#sub_cat_close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+				Cancelar
+			=submit_tag "Guardar", class: "btn btn-primary"

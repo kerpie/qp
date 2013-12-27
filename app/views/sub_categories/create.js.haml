@@ -1,0 +1,5 @@
+-if @count == 1
+	$("#subcategory_content").html("#{j render 'categories/sub_category_list_item', subcategories: @subcategories, index: @count, uncomplete: false}");
+-else
+	$("#subcategory_content table tbody").append("#{j render 'categories/sub_category_list_item', sb: @subcategory, index: @count, uncomplete: true}");	
+$("#close_button").click();

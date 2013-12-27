@@ -1,0 +1,5 @@
+-if @count == 1
+	$("#district_content").html("#{j render 'cities/district_list_item', districts: @districts, index: @count, uncomplete: false}");
+-else
+	$("#district_content table tbody").append("#{j render 'cities/district_list_item', dt: @district, index: @count, uncomplete: true}");	
+$("#close_button").click();

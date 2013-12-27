@@ -1,6 +1,6 @@
 $ ->
 	$(document).on "click", "a[class='accordion-toggle']", ->
-		$("#cat_id").val($(this).data("id"))
+		$("#city_id").val($(this).data("id"))
 		$("#new_name").val($(this).text())
 
 $ ->
@@ -8,5 +8,5 @@ $ ->
 		$(this).addClass("toDestroy")
 
 $ ->
-	$(document).on "click", "a[class='destroy_sb']", ->
-		$(this).addClass("destroyThisSb")
+	$(document).on "click", "a[class='destroy_dt']", ->
+		$(this).addClass("destroyThisDistrict")

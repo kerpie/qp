@@ -10,7 +10,7 @@
 					=link_to root_path do 
 						QPON
 						%span.hue .
-			- if false
+			- if admin_signed_in?
 				/
 					Usuario Administrador
 				.span8
@@ -20,37 +20,51 @@
 					.menu_wrap
 						%ul.nav.sf-menu
 							%li.sub-menu
+								=link_to "Tiendas", root_path
+								%ul
+									%li
+										=link_to root_path do
+											%span --
+											Crear Tienda
+							%li.sub-menu
 								=link_to "Cupones", root_path 
 								%ul
 									%li
 										=link_to root_path do 
 											%span --
-											Listar cupones nuevos
-									%li
-										=link_to root_path do 
-											%span --
-											Publicar cupon
+											Crear cupon
 									%li
 										=link_to root_path do 
 											%span --
 											Ver cupones pendientes de aprobacion
+							%li
+								=link_to "Usuarios", "#"
 							%li.sub-menu
-								=link_to "categorias", "javascript:{}"
+								=link_to "Administrar", "#"
 								%ul
 									%li
-										=link_to root_path do
+										=link_to categories_index_path do 
+											%span --
+											Categorias y subcategorias de Tiendas
+									%li
+										=link_to cities_index_path do 
+											%span --
+											Ciudades y distritos
+									%li
+										=link_to root_path do 
+											%span --
+											Estados de Cupones
+									%li
+										=link_to root_path do 
 											%span --
 											Tipos de Cupones
+							%li.sub-menu
+								=link_to "Cerrar Sesión", destroy_admin_session_path, method: :delete
+								%ul
 									%li
-										=link_to root_path do
+										=link_to edit_admin_registration_path do
 											%span --
-											Estados de los cupones
-									%li
-										=link_to root_path do
-											%span --
-											Ciudades
-							%li
-								=link_to "Cerrar Sesión", root_path 
+											Editar perfil de administrador
 			- elsif brand_signed_in?
 				/
 					Usuario Tienda
@@ -83,7 +97,7 @@
 			- elsif user_signed_in?
 				.span8
 					/
-						menu
+						Usuario normal
 					%nav#main_menu
 					.menu_wrap
 						%ul.nav.sf-menu
@@ -99,7 +113,7 @@
 			- else
 				.span8
 					/
-						menu
+						Sin sesion
 					%nav#main_menu
 					.menu_wrap
 						%ul.nav.sf-menu

@@ -21,8 +21,9 @@ class BranchesController < ApplicationController
   	@branch.altitude = params[:altitude]
   	@branch.district_id = params[:district_id]
   	@branch.save
+    
   	respond_to do |format|
-		format.js
+		  format.js
   	end
   end
 

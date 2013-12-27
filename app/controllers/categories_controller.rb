@@ -5,20 +5,35 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
-	end
-
-	def new
+		@category = Category.find(params[:id])
+		@subcategories = @category.sub_categories
+		respond_to do |format|
+		  format.js
+  		end
 	end
 
 	def create
-	end
-
-	def edit
+		@category = Category.new
+		@category.name = params[:name]
+		@category.save
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def update
+		@category = Category.find(params[:cat_id])
+		@category.name = params[:new_name]
+		@category.save
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def destroy
+		@category = Category.find(params[:id]).destroy()
+		respond_to do |format|
+			format.js
+		end
 	end
 end

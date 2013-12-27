@@ -1,0 +1,13 @@
+#city_group.accordion-group
+	.accordion-heading
+		=link_to "#city_#{ct.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion3", id: "#{ct.id}"} do
+			=ct.name.capitalize
+	.accordion-body.collapse{ id: "city_#{ct.id}"}
+		.accordion-inner
+			%ul
+				%li
+					=link_to "Mostrar", cities_show_path(ct.id), remote: true
+				%li
+					=link_to "Editar", "#update_city_form", role: "button", data: {toggle: "modal"}
+				%li
+					=link_to "Eliminar", cities_destroy_path(ct.id), remote: true, class: "destroy_link"
