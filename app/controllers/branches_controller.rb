@@ -26,5 +26,4 @@ class BranchesController < ApplicationController
 		  format.js
   	end
   end
-
 end

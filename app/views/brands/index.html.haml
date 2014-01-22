@@ -1,0 +1,31 @@
+.page_container
+	%h6
+		%a{href: "index.html"}
+			Tiendas
+		\/ indice
+	.inner_content
+		%h1
+			Tiendas registradas
+		%table.table.table-striped
+			%tr
+				%th
+					\#
+				%th
+					Nombre
+				%th
+					Correo de activacion
+				%th{colspan: "2"}
+					Opciones
+				}
+			-@brands.each.with_index(1) do |brand, index|
+				%tr
+					%td
+						=index
+					%td
+						=brand.name
+					%td
+						=brand.email
+					%td
+						=link_to "Editar", edit_brand_registration_path(brand)
+					%td
+						Suspender

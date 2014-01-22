@@ -23,7 +23,7 @@
 								=link_to "Tiendas", root_path
 								%ul
 									%li
-										=link_to root_path do
+										=link_to new_brand_registration_path do
 											%span --
 											Crear Tienda
 							%li.sub-menu
@@ -120,7 +120,8 @@
 							%li.sub-menu
 								/
 									=link_to "Iniciar sesión", "#user_session", class: "btn", role: "button", data: {toggle: "modal"}
-								=link_to "Iniciar sesión", new_user_session_path
+									=link_to "Iniciar sesión", new_user_session_path
+								=link_to "Iniciar sesión", "#start_session", data: {toggle: "modal", role: "button"}
 								%ul
 									%li
 										=link_to new_brand_session_path do

@@ -15,19 +15,18 @@
 			=stylesheet_link_tag "http://fonts.googleapis.com/css?family=Source+Sans+Pro:600"
 			=stylesheet_link_tag "http://fonts.googleapis.com/css?family=Source+Sans+Pro:700" 
 			<![endif]
-		= stylesheet_link_tag "css/prettyPhoto.css"
-		= stylesheet_link_tag "css/bootstrap.css" 
+		= stylesheet_link_tag "prettyPhoto.css"
+		= stylesheet_link_tag "bootstrap.css" 
 		/
 			REUBICAR FUENTES!
-		= stylesheet_link_tag "css/font-awesome.min.css" 
+		= stylesheet_link_tag "font-awesome.min.css" 
 
-		= stylesheet_link_tag "css/theme.css" 
-		= stylesheet_link_tag "css/bootstrap-responsive.css" 
-		= stylesheet_link_tag "css/max-width960.css" 
+		= stylesheet_link_tag "theme.css" 
+		= stylesheet_link_tag "max-width960.css" 
 
 		/
 			[if IE 7]>
-			=stylesheet_link_tag "css/font-awesome-ie7.min.css"
+			=stylesheet_link_tag "font-awesome-ie7.min.css"
 			<![endif]
 		/
 			[if lt IE 9]>
@@ -47,6 +46,26 @@
 		.container
 			= render "layouts/header"
 			= yield
+			= render "layouts/footer"
+
+		=form_for(:user, :url => session_path(:user)) do |f|
+			#start_session.modal.hide.fade{tabindex: "-1", role: "dialog", aria:{ labelledby: "myModalLabel", hidden: "true"}}
+				.modal-header
+					%button.close{ id: "category_close_button", type: "button", data: {dismiss: "modal"}, aria: {hidden: "true"}}
+						×
+					%h3
+						INICIAR SESIÓN
+				.modal-body
+					.new_category_part
+						=f.label :email, "Correo: "
+						=f.text_field :email
+					.new_category_part
+						=f.label :password, "Contraseña: "
+						=f.password_field :password
+				.modal-footer
+					%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+						Cancelar
+					=submit_tag "Iniciar sesión", class: "btn btn-primary"
 
 		= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
 

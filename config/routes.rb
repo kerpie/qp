@@ -4,7 +4,10 @@ Qp::Application.routes.draw do
 
   devise_for :admins
   devise_for :users
-  devise_for :brands
+
+  #Brand
+  get "brands/index" => "brands#index", as: :brands_index
+  devise_for :brands, controllers: { registrations: "brands/registrations" }
 
   #Category
   get 'categories/index' => "categories#index", as: :categories_index
