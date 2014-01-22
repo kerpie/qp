@@ -32,6 +32,7 @@ end
 gem 'haml-rails'
 gem 'devise'
 
+=begin
 group :production do 
 	gem 'pg'
 	gem 'thin'
@@ -39,8 +40,11 @@ end
 
 group :development do 
 	# Use sqlite3 as the database for Active Record
-	gem 'sqlite3'
+	
 end
+=end
+
+gem 'sqlite3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
