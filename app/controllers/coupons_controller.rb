@@ -3,7 +3,7 @@ class CouponsController < ApplicationController
   before_action :set_coupon, only: [:show, :edit, :update, :destroy]
 
   def index
-  	@coupons = Coupon.all
+  	@coupons = Coupon.where(coupon_state: CouponState.where("name like ?", "%prob%").first)
   	@coupon_types = CouponType.all
   end
 
@@ -20,13 +20,18 @@ class CouponsController < ApplicationController
 
   def create
   	@coupon = Coupon.new(coupon_params)
-    @coupon.discount = @coupon.discount/100
+    unless @coupon.discount.nil?
+      @coupon.discount = @coupon.discount/100
+    end
 
-    if brand_signed_in?
-      @coupon.brand_id = params[:brand_id]
+=begin
+if brand_signed_in?
+      @coupon.brand = Brand.find(params[:brand_id])
     elsif admin_signed_in?
       @coupon.admin_id = params[:admin_id]
     end
+=end
+
 
   	respond_to do |format|
   		if @coupon.save
@@ -68,6 +73,24 @@ class CouponsController < ApplicationController
   	end
   end
 
+  def published_coupons
+    @brand = Brand.find(params[:id])
+    @coupons = @brand.coupons.where(coupon_state_id: CouponState.where("name like ?", "%prob%").first.id)
+    @coupon_types = CouponType.all
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def pending_coupons
+    @brand = Brand.find(params[:id])
+    @coupons = @brand.coupons.where(coupon_state_id: CouponState.where("name like ?", "%endi%").first.id)
+    @coupon_types = CouponType.all
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def saved_coupons
     @brand = Brand.find(params[:id])
     @coupons = @brand.coupons.where(coupon_state_id: CouponState.where("name like ?", "%uar%").first.id)
@@ -89,6 +112,16 @@ class CouponsController < ApplicationController
   	end
 
   	def coupon_params
-		  params.require(:coupon).permit(:name, :description, :start_date, :end_date, :discount, :coupon_type_id, :coupon_state_id, { :branch_ids => []})
+		  params.require(:coupon).permit(
+        :name, 
+        :description, 
+        :start_date, 
+        :end_date, 
+        :discount, 
+        :coupon_type_id, 
+        :coupon_state_id, 
+        :brand_id,
+        :promo_image, 
+        {:branch_ids=>[]})
   	end
 end

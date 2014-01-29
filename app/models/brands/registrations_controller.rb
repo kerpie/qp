@@ -8,4 +8,8 @@ class Brands::RegistrationsController < Devise::RegistrationsController
 		end
 	end
 
+	def after_sign_up_path_for(resource)
+		edit_brand_registration_path
+	end
+
 end

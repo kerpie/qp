@@ -9,6 +9,14 @@ class Coupon < ActiveRecord::Base
 	has_many :histories
 	has_many :users, through: :histories
 
+	has_attached_file :promo_image, 
+	path: ":rails_root/public/system/:class/:attachment/:id/:style/:filename",
+	url: "/system/:class/:attachment/:id/:style/:filename"
+
 	belongs_to :brand
 
+	#Validations
+
+	validates :name, :description, :discount, presence: { message: " no puede estar vacío"}
+	
 end

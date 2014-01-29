@@ -1,6 +1,9 @@
-.span4.element.category01{ data: { category: "#{coupon.name}" } }
+.span4.element{ class: "#{coupon.coupon_type.name}", data: { category: "#{coupon.coupon_type.name}" } }
 	.hover_img
-		=image_tag "portfolio/1.jpg", alt: ""
+		-if coupon.promo_image?
+			=image_tag coupon.promo_image.url, alt: ""
+		-else
+			=image_tag "portfolio/1.jpg", alt: ""
 		%span.portfolio_zoom
 			=link_to "","img/portfolio/1.jpg", {data: {rel: "prettyPhoto[portfolio1]"}}
 		%span.portfolio_link

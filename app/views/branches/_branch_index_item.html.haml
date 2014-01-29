@@ -1,6 +1,6 @@
 .accordion-group
 	.accordion-heading
-		=link_to "#branch_#{br.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion2" } do
+		=link_to "#branch_#{br.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion2", id: "#{br.id}"} do
 			%i.icon-bookmark
 			= "Tienda #{index}"
 	.accordion-body.collapse{ id: "branch_#{br.id}"}
@@ -9,43 +9,57 @@
 				%li
 					%span
 						Dirección: 
-					= br.address
+					%span{class: "address no_style"}
+						= br.address
 				%li
 					%span
 						Referencia:
-					= br.reference
+					%span{class: "reference no_style"}
+						= br.reference
 				%li
 					%span
 						Tiene estacionamiento: 
-					= br.has_parking ? "Si" : "No"
+					%span{class: "parking  no_style"}
+						= br.has_parking ? "Si" : "No"
 				%li
 					%span
 						Tiene valet parking:
-					= br.has_valet ? "Si" : "No"
+					%span{class: "valet no_style"}
+						= br.has_valet ? "Si" : "No"
 				%li
 					%span
 						Horario de atención:
-					= "#{br.start_hour}:#{br.start_minute} am - #{br.end_hour}:#{br.end_minute} pm"
+					%span{class: "hours no_style"}
+						= "#{br.start_hour}:#{br.start_minute} am - #{br.end_hour}:#{br.end_minute} pm"
+					=hidden_field_tag "to_edit_start_hour", br.start_hour
+					=hidden_field_tag "to_edit_start_minute", br.start_minute
+					=hidden_field_tag "to_edit_end_hour", br.end_hour
+					=hidden_field_tag "to_edit_end_minute", br.end_minute
 				%li
 					%span
 						Distrito:
-					= br.district.name
+					%span{class: "district no_style", data: {id: "#{br.district_id}"}}
+						= br.district.name
 				%li
 					%span
 						Ciudad:
-					= br.district.city.name
+					%span{class: "city no_style", data: {id: "#{br.district.city.id}"}}
+						= br.district.city.name
 				%li
 					%span
 						Latitud:
-					= br.latitude
+					%span{class: "latitude no_style"}
+						= br.latitude
 				%li
 					%span
 						Longitud:
-					= br.longitude
+					%span{class: "longitude no_style"}
+						= br.longitude
 				%li
 					%span
 						Altitud:
-					= br.altitude
+					%span{class: "altitude no_style"}
+						= br.altitude
 			.branch_options
-				=link_to "Editar", root_path, class: "btn"
-				=link_to "Eliminar", root_path, class: "btn btn-danger"
+				=link_to "Editar", "#edit_branch", class: "btn click_to_edit_branch", role: "button", data: {toggle: "modal"}
+				=link_to "Eliminar", destroy_branch_path(br.id), remote: true, class: "btn btn-danger"

@@ -56,12 +56,17 @@
 					%h3
 						INICIAR SESIÓN
 				.modal-body
-					.new_category_part
-						=f.label :email, "Correo: "
-						=f.text_field :email
-					.new_category_part
-						=f.label :password, "Contraseña: "
-						=f.password_field :password
+					#user_session_index_start
+						.new_category_part
+							=f.label :email, "Correo: "
+							=f.text_field :email
+						.new_category_part
+							=f.label :password, "Contraseña: "
+							=f.password_field :password
+					#user_alternative_session_start
+						=link_to "Iniciar sesión usando Facebook"
+						%br
+						=link_to "Registrarse", new_user_registration_path
 				.modal-footer
 					%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
 						Cancelar
@@ -71,8 +76,11 @@
 
 		<script type="text/javascript">$('a[data-rel]').each(function() {$(this).attr('rel', $(this).attr('data-rel')).removeAttr('data-rel');});</script>
 
-		<script type="text/javascript">$(window).load(function(){$('.projects').isotope({});});</script>		
-		
-		<script type="text/javascript">$(function () {$('div.element').hide();});var i = 0; var int=0; $(window).bind("load", function() { var int = setInterval("doThis(i)",100);fade in speed in milliseconds}); function doThis() {var imgs = $('div.element').length;if (i >= imgs) {clearInterval(int);}$('div.element:hidden').eq(0).fadeIn(100);i++;}</script>			
-
+		/
+			<script type="text/javascript">$(window).load(function(){$('.projects').isotope({});});</script>		
+			
+			<script type="text/javascript">$(function () {$('div.element').hide();});var i = 0; var int=0; $(window).bind("load", function() { var int = setInterval("doThis(i)",100);fade in speed in milliseconds}); function doThis() {var imgs = $('div.element').length;if (i >= imgs) {clearInterval(int);}$('div.element:hidden').eq(0).fadeIn(100);i++;}</script>
+		= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false"
+		= javascript_include_tag "https://raw.github.com/HPNeo/gmaps/master/gmaps.js"
 		= javascript_include_tag "application"
+		= yield :ready_scripts

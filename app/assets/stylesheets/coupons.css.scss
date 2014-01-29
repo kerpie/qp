@@ -1,9 +1,21 @@
-.edit_coupon{
+#new_coupon, .edit_coupon{
 	.part{
+		margin: 5px 0px;
 		.district_checkbox{
 			width: 20%;
 			display: inline-block;
 			padding: 5px;
+			position: relative;
+			top: 3px;
 		}
 	}
+	.file_part{
+		padding: 10px 0px;
+	}
+}
+
+#coupon_errors{
+	padding:10px;
+	color: white;
+	background: red;
 }

@@ -30,3 +30,17 @@
 	text-align: center;
 	font-size: 16px;
 }
+
+#user_session_index_start{
+	float: left;
+}
+
+#user_alternative_session_start{
+	float: right;
+	padding: 30px;
+}
+
+#user_alternative_session_start a{
+	padding: 10px;
+	display: block;
+}

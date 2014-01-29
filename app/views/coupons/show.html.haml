@@ -38,15 +38,11 @@
 							= sprintf("%.0f", @coupon.discount*100) + "%"
 						%li
 							Marca:
-							= @coupon.brand.name
+							= (@coupon.brand.name.nil? || @coupon.brand.name.empty?) ? "---" : @coupon.brand.name
 						%li
 							Disponibilidad de la promocion:
-							%br
-							%ul
-							- @coupon.branches.each do |branch|
-								%li 
-									= branch.district.name
-									%br
+							= coupon_locations(@coupon.branches)
+							#locations_map
 					.pad25
 					/
 						Mostrar cupon previo y siguiente
@@ -57,10 +53,40 @@
 						.clear
 						.pad25
 				.span8{ style: "margin-top:14px;" }
-					=link_to "img/large/13.jpg", data:{ rel: "prettyPhoto[portfolio1]" } do
-						=image_tag "http://casosdemarketing.files.wordpress.com/2009/07/starbucks-21.jpg", alt: "", width: "700px", height: "525px"
+					- if @coupon.promo_image?
+						=link_to "#", data:{ rel: "prettyPhoto[portfolio1]" } do
+							=image_tag @coupon.promo_image.url, alt: ""
 
 		-if brand_signed_in?
 			.coupon_options_for_brand
 				=link_to "Editar", edit_coupon_path(@coupon), class: 'btn'
 				=link_to "Borrar", @coupon, class: 'btn btn-danger', method: :delete, data: { confirm: "Una vez eliminado no podra recuperarse. Est seguro de continuar?" }
+
+-content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			var map = new GMaps({
+				div: "#locations_map", 
+				lat: $("#coupon_locations option:first").data("lat"),
+				lng: $("#coupon_locations option:first").data("lng"),
+			});
+
+			map.addMarker({
+					lat: $("#coupon_locations option:first").data("lat"),
+					lng: $("#coupon_locations option:first").data("lng")
+				});
+
+			map.setCenter($("#coupon_locations option:first").data("lat"),$("#coupon_locations option:first").data("lng"), function(){});
+
+			$("#locations_map").attr("style","width: 100%; height: 250px;");
+
+			$("#coupon_locations").change(function(){
+				map.removeMarkers();
+				map.addMarker({
+					lat: $("#coupon_locations option:selected").data("lat"),
+					lng: $("#coupon_locations option:selected").data("lng")
+				});
+				map.setCenter($("#coupon_locations option:selected").data("lat"), $("#coupon_locations option:selected").data("lng"), function(){});
+			});
+		});
+	

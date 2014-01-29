@@ -6,3 +6,13 @@
 %ul
 	%li
 		=link_to "volver", coupons_path
+
+-content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			var discount = $("#coupon_discount").val();
+			if(discount.length > 0){
+				discount *= 100;
+				$("#coupon_discount").val(discount);
+			}
+		});

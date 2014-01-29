@@ -16,6 +16,9 @@
 					Registrar nueva tienda
 			.modal-body
 				=hidden_field_tag "brand_id", current_brand.id
+				=hidden_field_tag "longitude"
+				=hidden_field_tag "altitude"
+				=hidden_field_tag "latitude"	
 				.new_branch_part
 					= label_tag "address", "Dirección: "
 					= text_field_tag "address"
@@ -39,16 +42,105 @@
 				.new_branch_part
 					=label_tag "district_id", "Ciudad: "
 					= select_tag "district_id",option_groups_from_collection_for_select(City.all, :districts, :name, :id, :name)
-				.new_branch_part
-					= label_tag "longitude", "Longitud: "
-					= text_field_tag "longitude"
-				.new_branch_part
-					= label_tag "altitude", "Altitud: "
-					= text_field_tag "altitude"
-				.new_branch_part
-					= label_tag "latitude", "Latitud: "
-					= text_field_tag "latitude"
+				#map_container
+					%span
+						¿Dónde se encuentra ubicada la tienda?
+					#map_canvas
 			.modal-footer
 				%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
 					Cancelar
 				=submit_tag "Guardar", class: "btn btn-primary"
+
+#edit_branch_for_this_brand
+	=form_tag edit_branch_path, :remote => true, id: "edit_this_branch" do
+		#edit_branch.modal.hide.fade{ tabindex: "-1", role: "dialog", aria: {labelledby: "myModalLabel", hidden: "true"}}
+			.modal-header
+				%button{ type: "button", class: "close", data: {dismiss: "modal"},aria:{hidden: "true"}}
+					×
+				%h3#myModalLabel
+					Editar registro de tienda
+			.modal-body
+				=hidden_field_tag "brand_id", current_brand.id
+				=hidden_field_tag "branch_id", value: -1
+				=hidden_field_tag "edit_longitude"
+				=hidden_field_tag "edit_altitude"
+				=hidden_field_tag "edit_latitude"
+				.new_branch_part
+					= label_tag "edit_address", "Dirección: "
+					= text_field_tag "edit_address"
+				.new_branch_part
+					= label_tag "edit_reference", "Referencia: "
+					= text_area_tag "edit_reference"
+				.new_branch_part
+					= label_tag "edit_time", "Hora de Atencion: "
+					= attention_time :edit_start 
+					%span#separator_dash -
+					= attention_time :edit_end
+				.new_branch_part
+					= label_tag "edit_has_parking","¿Tiene estacionamiento?"
+					= boolean_select "edit_has_parking"
+				.new_branch_part
+					= label_tag "edit_has_valet","¿Tiene valet parking? "
+					= boolean_select "edit_has_valet"
+				.new_branch_part
+					=label_tag "edit_city", "Ciudad: "
+					= select_tag "edit_city", options_from_collection_for_select(City.all, :id, :name)
+				.new_branch_part
+					=label_tag "edit_district_id", "Ciudad: "
+					= select_tag "edit_district_id",option_groups_from_collection_for_select(City.all, :districts, :name, :id, :name)
+				#map_container_edit
+					%span
+						¿Dónde se encuentra ubicada la tienda?
+					#map_canvas_edit
+			.modal-footer
+				%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+					Cancelar
+				=submit_tag "Actualizar", class: "btn btn-primary"
+
+- content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			var map = new GMaps({
+				div: "#map_canvas",
+				lat: -12.043333,
+				lng: -77.028333,
+				click: function(e){
+					map.removeMarkers();
+					map.addMarker({
+						lat: e.latLng.lat(), 
+						lng: e.latLng.lng()
+					});
+					$("#longitude").val(e.latLng.lng());
+					$("#latitude").val(e.latLng.lat());
+				}
+			});
+
+			$("#map_canvas").attr("style","width: 100%; height: 350px;");
+
+			$(".accordion-group").click(function(){
+				var latitude = parseFloat($(this).find(".latitude").text().trim())
+				var longitude = parseFloat($(this).find(".longitude").text().trim())
+				
+				var edit_map = new GMaps({
+					div: "#map_canvas_edit",
+					lat: latitude,
+					lng: longitude,
+					click: function(e){
+						edit_map.removeMarkers();
+						edit_map.addMarker({
+							lat: e.latLng.lat(), 
+							lng: e.latLng.lng()
+						});
+						$("#edit_longitude").val(e.latLng.lng());
+						$("#edit_latitude").val(e.latLng.lat());
+					}
+				});
+				
+				edit_map.addMarker({
+					lat: latitude,
+					lng: longitude
+				});
+
+				$("#map_canvas_edit").attr("style","width: 100%; height: 350px;");
+			});
+		});

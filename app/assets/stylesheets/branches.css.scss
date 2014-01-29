@@ -1,8 +1,24 @@
 .accordion-inner{
+	ul{
+		li{
+			.no_style{
+				font-weight: 400;
+			}
+		}
+	}
 	.branch_options{
 		a{
 			margin: 5px;
 			padding: 5px;
 		}		
+	}
+}
+
+#map_container, #map_container_edit{
+	position: relative;
+	span{
+		margin: 10px 0px;
+		display: block;
+		font-size: 16px;
 	}
 }

@@ -13,4 +13,11 @@ class Brand < ActiveRecord::Base
 	has_many :branches
 
 	has_many :coupons
+
+	has_attached_file :logo_image, styles: {
+		medium: "150x150>",
+		small: "50x50>"
+	}, 
+	path: ":rails_root/public/system/:class/:attachment/:id/:style/:filename",
+	url: "/system/:class/:attachment/:id/:style/:filename"
 end

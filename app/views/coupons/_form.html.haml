@@ -1,6 +1,6 @@
-=form_for(@coupon) do |f|
+=form_for(@coupon, html: {multipart: true}) do |f|
 	- if @coupon.errors.any?
-		%ul
+		%ul#coupon_errors
 			-@coupon.errors.full_messages.each do |msg|
 				%li
 					=msg
@@ -12,30 +12,35 @@
 		=f.label :name, "Nombre: "
 		=f.text_field :name
 	.part
-		=f.label :description, "Descripcion: "
+		=f.label :description, "Descripción: "
 		=f.text_area :description
 	.part
-		=f.label :start_date, "Fecha de inicio de promocion:"
-		=f.date_select :start_date, start_year: 2013
+		=f.label :start_date, "Fecha de inicio de promoción:"
+		=f.date_select :start_date, use_month_names: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], start_year: 2013, order: [:day, :month, :year]
 	.part
-		=f.label :end_date, "Fecha de fin de promocion:"
-		=f.date_select :end_date, start_year: 2013
+		=f.label :end_date, "Fecha de fin de promoción:"
+		=f.date_select :end_date, use_month_names: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], start_year: 2013, order: [:day, :month, :year]
 	.part
-		=f.label :discount, "Descuento:"
+		=f.label :discount, "Descuento (en %):"
 		=f.text_field :discount
+		#discount_error
+			%span#discount_error_message
 	.part
 		%h2
 			¿Dónde estará disponible este cupón?
 			= hidden_field_tag "coupon[branch_ids][]", nil
 		- current_brand.branches.each do |branch|
 			=check_box_tag "coupon[branch_ids][]", branch.id, @coupon.branch_ids.include?(branch.id), id: dom_id(branch)
-			=label_tag dom_id(branch), branch.district.name, class: "district_checkbox"
+			=label_tag dom_id(branch), branch.district.name + " - " + branch.district.city.name, class: "district_checkbox"
 			%br
+	.part.file_part
+		=f.label :promo_image, "Imagen del cupón: "
+		=f.file_field :promo_image
 	.part
 		=f.label :coupon_type_id, "Tipo del cupon: "
 		=f.collection_select :coupon_type_id, CouponType.all, :id, :name
 	.part
 		=f.label :coupon_state_id, "Estado del cupon: "
-		=f.collection_select :coupon_state_id, CouponState.all, :id, :name
+		=f.collection_select :coupon_state_id, CouponState.first(2), :id, :name
 	.part
 		=f.submit

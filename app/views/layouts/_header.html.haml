@@ -84,7 +84,15 @@
 									%li
 										=link_to saved_coupons_path(current_brand.id) do
 											%span --
-											Cupones guardados
+											Ver cupones guardados
+									%li
+										=link_to coupons_published_path(current_brand.id) do 
+											%span --
+											Ver cupones aprobados
+									%li
+										=link_to pending_coupons_path(current_brand.id) do 
+											%span --
+											Ver cupones pendientes
 							%li
 								=link_to "Tiendas", branches_index_path(current_brand.id)
 							%li.sub-menu

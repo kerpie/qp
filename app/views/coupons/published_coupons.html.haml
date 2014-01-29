@@ -1,6 +1,6 @@
 .page_container
 	%h6
-		=link_to "Tu cuponera virtual", "#"
+		=link_to "Cupones aprobados", "#"
 	.inner_content
 		#options
 			%ul#filters.option-set{ data: {"option-key" => "filter"}}
@@ -8,7 +8,7 @@
 					=link_to "All", "#filter", class: "selected", data: { option_value: "*" } 
 				- @coupon_types.each do |ct|
 					%li
-						=link_to ct.name, "#filter", data: { option_value: ".#{ct.name}" }
+						=link_to ct.name, "#filter", data: { option_value: ct.name }
 			.clear
 		.row
 			.projects
