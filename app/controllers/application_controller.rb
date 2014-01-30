@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def devise_parameter_sanitizer
-  	if resource_class == Brand
-  		Brand::ParameterSanitizer.new(Brand, :brand, params)
-  	else
-  		super
-  	end
+    if resource_class == Brand
+      BrandParameterSanitizer.new(Brand, :brand, params)
+    elsif resource_class == User
+      UserParameterSanitizer.new(User, :user, params)
+    else
+      super
+    end
   end
-
 end

@@ -37,10 +37,18 @@
 
 #user_alternative_session_start{
 	float: right;
-	padding: 30px;
+	padding: 30px 60px;
+	text-align: center;
+	border-left: 1px solid #ccc;
 }
 
 #user_alternative_session_start a{
 	padding: 10px;
 	display: block;
+}
+
+#facebook_login_button{
+	color: white;
+    border-color: #2d5073;
+    background-color: #3b5998;
 }

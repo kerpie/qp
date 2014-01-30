@@ -1,9 +1,25 @@
 %h2.register_title
   Editando
-  = current_user.name.nil? || current_user.name.empty? ? resource_name.to_s.humanize : " Usuario"
+  = current_user.name.nil? || current_user.name.empty? ?  " Usuario" : "#{current_user.name} #{current_user.last_name}"
 
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
+
+  .edit_user_part
+    = f.label :name, "Nombre: "
+    = f.text_field :name
+
+  .edit_user_part
+    = f.label :last_name, "Apellido: "
+    = f.text_field :last_name
+
+  .edit_user_part
+    = f.label :birthday, "Fecha de nacimiento: "
+    = f.date_select :birthday, start_year: 1970, end_year: Time.now.year, order: [:day, :month, :year], use_month_names: %w(Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre)
+
+  .edit_user_part
+    = f.label :sex, "Sexo: "
+    = f.select :sex, { masculino: true, femenino: false }
 
   .edit_user_part
     = f.label :email

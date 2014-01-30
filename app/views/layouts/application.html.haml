@@ -64,7 +64,7 @@
 							=f.label :password, "Contraseña: "
 							=f.password_field :password
 					#user_alternative_session_start
-						=link_to "Iniciar sesión usando Facebook"
+						=link_to "Iniciar sesión con fb", "#", id: "facebook_login_button"
 						%br
 						=link_to "Registrarse", new_user_registration_path
 				.modal-footer
