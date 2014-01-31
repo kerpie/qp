@@ -29,3 +29,6 @@ Qp::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+ENV['FACEBOOK_APP_ID'] = "491036367675336"
+ENV['FACEBOOK_APP_SECRET'] = "f3fd4770addf0083f9440f488813ba55"

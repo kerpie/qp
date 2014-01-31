@@ -41,12 +41,13 @@
     = f.label :password_confirmation, "Confirmacion de contraseña: "
     = f.password_field :password_confirmation
 
-  .edit_user_part
-    = f.label :current_password do
-      Contraseña actual:
-      %i
-        (Necesitamos tu contraseña actual para confirmar los cambios)
-    = f.password_field :current_password
+  - if f.object.encrypted_password.present?
+    .edit_user_part
+      = f.label :current_password do
+        Contraseña actual:
+        %i
+          (Necesitamos tu contraseña actual para confirmar los cambios)
+      = f.password_field :current_password
 
   .edit_user_part
     = f.submit "Actualizar datos"

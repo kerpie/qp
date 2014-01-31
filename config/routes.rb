@@ -3,7 +3,7 @@ Qp::Application.routes.draw do
   root "coupons#index"
 
   devise_for :admins
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
   #Brand
   get "brands/index" => "brands#index", as: :brands_index

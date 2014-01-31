@@ -32,6 +32,7 @@ end
 gem 'haml-rails'
 gem 'devise'
 gem 'paperclip'
+gem 'omniauth-facebook'
 
 =begin
 group :production do 

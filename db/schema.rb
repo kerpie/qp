@@ -183,8 +183,9 @@ ActiveRecord::Schema.define(version: 20140130224245) do
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.string   "fb_id"
-    t.string   "fb_photo"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "fb_photo_url"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

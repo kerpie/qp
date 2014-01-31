@@ -4,17 +4,24 @@
 =form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
 	= devise_error_messages!
 
+	= f.hidden_field :name, value: "no_name"
+	= f.hidden_field :last_name, value: "no_last_name"
+	= f.hidden_field :sex, value: false
+	= f.hidden_field :provider, value: "no_provider"
+	= f.hidden_field :uid, value: "no_uid"
+
 	.register_user_part
 		= f.label :email, "Correo: "
 		= f.email_field :email, autofocus: true
 
-	.register_user_part
-		= f.label :password, "Contraseña: "
-		= f.password_field :password
+	- if f.object.password_required?
+		.register_user_part
+			= f.label :password, "Contraseña: "
+			= f.password_field :password
 
-	.register_user_part
-		= f.label :password_confirmation
-		= f.password_field :password_confirmation
+		.register_user_part
+			= f.label :password_confirmation
+			= f.password_field :password_confirmation
 
 	.submit_user_part
 		= f.submit "Registrarse"
