@@ -78,3 +78,6 @@ Qp::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+ENV['FACEBOOK_APP_ID'] = "491036367675336"
+ENV['FACEBOOK_APP_SECRET'] = "f3fd4770addf0083f9440f488813ba55"
