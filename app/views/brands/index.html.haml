@@ -14,18 +14,15 @@
 					Nombre
 				%th
 					Correo de activacion
-				%th{colspan: "2"}
+				%th
 					Opciones
-				}
 			-@brands.each.with_index(1) do |brand, index|
 				%tr
 					%td
 						=index
 					%td
-						=brand.name
+						=brand.name? ? brand.name : "No ingresado"
 					%td
 						=brand.email
 					%td
 						=link_to "Editar", edit_brand_registration_path(brand)
-					%td
-						Suspender

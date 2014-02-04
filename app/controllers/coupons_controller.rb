@@ -82,7 +82,7 @@ if brand_signed_in?
     end
   end
 
-  def pending_coupons
+  def pending_coupons_by_brand
     @brand = Brand.find(params[:id])
     @coupons = @brand.coupons.where(coupon_state_id: CouponState.where("name like ?", "%endi%").first.id)
     @coupon_types = CouponType.all
@@ -103,6 +103,24 @@ if brand_signed_in?
   def history
     @coupon_types = CouponType.all
     @coupons = current_user.coupons
+  end
+
+  def pending_coupons
+    @coupons = Coupon.where(coupon_state_id: CouponState.where("name like ?", "%pendi%"))
+    @coupon_types = CouponType.all
+  end
+
+  def approve_coupon
+    
+    @coupon = Coupon.find(params[:id])
+    @coupon.coupon_state_id = CouponState.last.id
+    @coupon.admin_id = params[:admin_id]
+    @coupon.save
+    
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   private

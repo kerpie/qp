@@ -20,25 +20,12 @@
 					.menu_wrap
 						%ul.nav.sf-menu
 							%li.sub-menu
-								=link_to "Tiendas", root_path
-								%ul
-									%li
-										=link_to new_brand_registration_path do
-											%span --
-											Crear Tienda
-							%li.sub-menu
 								=link_to "Cupones", root_path 
 								%ul
 									%li
-										=link_to root_path do 
+										=link_to pending_coupons_path do 
 											%span --
-											Crear cupon
-									%li
-										=link_to root_path do 
-											%span --
-											Ver cupones pendientes de aprobacion
-							%li
-								=link_to "Usuarios", "#"
+											Ver Cupones pendientes de aprobacion
 							%li.sub-menu
 								=link_to "Administrar", "#"
 								%ul
@@ -90,7 +77,7 @@
 											%span --
 											Ver cupones aprobados
 									%li
-										=link_to pending_coupons_path(current_brand.id) do 
+										=link_to pending_coupons_by_brand_path(current_brand.id) do 
 											%span --
 											Ver cupones pendientes
 							%li

@@ -3,7 +3,7 @@ Qp::Application.routes.draw do
   root "coupons#index"
 
   devise_for :admins
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" } 
 
   #Brand
   get "brands/index" => "brands#index", as: :brands_index
@@ -37,7 +37,9 @@ Qp::Application.routes.draw do
   get 'coupons/history' => "coupons#history", as: :coupons_history
   get 'coupons/published_coupons/:id' => "coupons#published_coupons", as: :coupons_published
   get 'coupons/saved_coupons/:id' => "coupons#saved_coupons", as: :saved_coupons
-  get 'coupons/pending_coupons/:id' => "coupons#pending_coupons", as: :pending_coupons
+  get 'coupons/pending_coupons/:id' => "coupons#pending_coupons_by_brand", as: :pending_coupons_by_brand
+  get 'coupons/pending_coupons' => "coupons#pending_coupons", as: :pending_coupons
+  post 'coupons/approve_coupon/:id' => "coupons#approve_coupon", as: :approve_coupon
   resources :coupons
 
   #Coupon States
