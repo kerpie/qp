@@ -6,7 +6,7 @@ $ ->
           type: "POST",
           url: "/branches/grouped_branches", 
           data: {
-            brand_id: value
+            brand_id: value,
             coupon_id: c_id
           }
         });
