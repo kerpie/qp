@@ -1,0 +1,16 @@
+=form_for(@brand) do |f|
+  .edit_brand_part
+    = f.label :name, "Nombre: "
+    = f.text_field :name
+
+  .edit_brand_part
+    = f.label :email, "Correo: "
+    = f.email_field :email, autofocus: true
+
+  .edit_brand_part.brand_logo
+    -if @brand.logo_image?
+      =image_tag @brand.logo_image.url(:medium)
+    = f.label :logo_image, "Logo: "
+    = f.file_field :logo_image
+  .submit_brand_part
+    = f.submit "Actualizar datos"

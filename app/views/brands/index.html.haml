@@ -15,6 +15,8 @@
 				%th
 					Correo de activacion
 				%th
+					Numero de Tiendas
+				%th
 					Opciones
 			-@brands.each.with_index(1) do |brand, index|
 				%tr
@@ -25,4 +27,6 @@
 					%td
 						=brand.email
 					%td
-						=link_to "Editar", edit_brand_registration_path(brand)
+						=link_to brand.branches.count, branches_index_path(brand.id)
+					%td
+						=link_to "Editar", edit_brand_path(brand)

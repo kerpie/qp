@@ -9,7 +9,11 @@ class Brands::RegistrationsController < Devise::RegistrationsController
 	end
 
 	def after_sign_up_path_for(resource)
-		edit_brand_registration_path
+		if admin_signed_in?
+			redirect_to brands_index_path
+		else
+			edit_brand_registration_path
+		end
 	end
 
 end

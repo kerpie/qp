@@ -1,6 +1,7 @@
 class BranchesController < ApplicationController
 
   def index
+    @brand = Brand.find(params[:id])
   	@branches = Branch.where(brand_id: params[:id])
   end
 
@@ -56,5 +57,17 @@ class BranchesController < ApplicationController
       format.js
     end
 
+  end
+
+  def grouped_branches
+
+    @brand = Brand.find(params[:brand_id])
+    @branches = @brand.branches
+
+    @coupon = (params[:c_id].nil? || params[:c_id].empty?) ? Coupon.new : Coupon.find(params[:c_id])
+
+    respond_to do |format|
+      format.js
+    end
   end
 end

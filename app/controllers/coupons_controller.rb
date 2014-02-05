@@ -10,8 +10,14 @@ class CouponsController < ApplicationController
   def new
     @coupon = Coupon.new
     respond_to do |format|
-      unless current_brand.branches.count>0
-        format.html {redirect_to root_path, notice: "Tienes que crear una tienda antes de poder crear cupones"}
+      
+      unless admin_signed_in?
+        #Brand session started
+        unless current_brand.branches.count>0
+          format.html {redirect_to root_path, notice: "Tienes que crear una tienda antes de poder crear cupones"}
+        else
+          format.html
+        end
       else
         format.html
       end

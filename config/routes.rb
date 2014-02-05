@@ -7,7 +7,8 @@ Qp::Application.routes.draw do
 
   #Brand
   get "brands/index" => "brands#index", as: :brands_index
-  devise_for :brands, controllers: { registrations: "brands/registrations", sessions: "brands/sessions" }
+  devise_for :brands, controllers: { registrations: "brands/registrations", sessions: "brands/sessions" }, path_prefix: "my"
+  resources :brands
 
   #Category
   get 'categories/index' => "categories#index", as: :categories_index
@@ -59,6 +60,7 @@ Qp::Application.routes.draw do
   post "branches/create" => "branches#create", as: :create_branch
   get "branches/destroy/:id" => "branches#destroy", as: :destroy_branch
   post "branches/edit" => "branches#edit", as: :edit_branch
+  post "branches/grouped_branches" => "branches#grouped_branches", as: :grouped_branches
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

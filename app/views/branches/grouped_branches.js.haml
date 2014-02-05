@@ -1,0 +1,4 @@
+-if @branches.count>0
+	$("#replaceable_branches").html("#{j render 'coupons/branches_item', branches: @branches, coupon: @coupon}");
+-else
+	$("#replaceable_branches").html("#{j link_to 'Esta marca no registra tiendas, por favor crea una para continuar', branches_index_path(@brand.id)}");

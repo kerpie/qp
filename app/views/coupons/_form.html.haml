@@ -6,8 +6,6 @@
 					=msg
 	-if brand_signed_in?
 		=f.hidden_field "brand_id", value: current_brand.id
-	-elsif admin_signed_in?
-		=f.hidden_field "admin_id", value: current_admin.id
 	.part
 		=f.label :name, "Nombre: "
 		=f.text_field :name
@@ -25,14 +23,21 @@
 		=f.text_field :discount
 		#discount_error
 			%span#discount_error_message
-	.part
-		%h2
-			¿Dónde estará disponible este cupón?
-			= hidden_field_tag "coupon[branch_ids][]", nil
-		- current_brand.branches.each do |branch|
-			=check_box_tag "coupon[branch_ids][]", branch.id, @coupon.branch_ids.include?(branch.id), id: dom_id(branch)
-			=label_tag dom_id(branch), branch.district.name + " - " + branch.district.city.name, class: "district_checkbox"
-			%br
+	- if brand_signed_in?
+		.part
+			%h2
+				¿Dónde estará disponible este cupón?
+				= hidden_field_tag "coupon[branch_ids][]", nil
+			= render "branches_item", branches: current_brand.branches, coupon: @coupon
+	-if admin_signed_in?
+		.part
+			=f.label "brand_id", "Tienda: "
+			=f.collection_select "brand_id", Brand.all, :id, :safe_name, {prompt: true}, data: {coupon_id: @coupon.id}
+		.part
+			%h2
+				¿Dónde estará disponible este cupón?
+				= hidden_field_tag "coupon[branch_ids][]", nil
+			#replaceable_branches
 	.part.file_part
 		=f.label :promo_image, "Imagen del cupón: "
 		=f.file_field :promo_image

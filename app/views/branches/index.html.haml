@@ -1,5 +1,8 @@
 %h1 
-	= current_brand.name
+	-if admin_signed_in?
+		= (@brand.name.nil? || @brand.name.empty?) ? "Nombre de tienda no registrado" : @brand.name
+	-else
+		= current_brand.name
 
 #accordion2.accordion
 	- @branches.each.with_index(1) do |br, index|
@@ -15,7 +18,10 @@
 				%h3#myModalLabel
 					Registrar nueva tienda
 			.modal-body
-				=hidden_field_tag "brand_id", current_brand.id
+				-if admin_signed_in?
+					=hidden_field_tag "brand_id", @brand.id
+				-else
+					=hidden_field_tag "brand_id", current_brand.id
 				=hidden_field_tag "longitude"
 				=hidden_field_tag "altitude"
 				=hidden_field_tag "latitude"	
@@ -60,7 +66,10 @@
 				%h3#myModalLabel
 					Editar registro de tienda
 			.modal-body
-				=hidden_field_tag "brand_id", current_brand.id
+				-if admin_signed_in?
+					=hidden_field_tag "brand_id", @brand.id
+				-else
+					=hidden_field_tag "brand_id", current_brand.id
 				=hidden_field_tag "branch_id", value: -1
 				=hidden_field_tag "edit_longitude"
 				=hidden_field_tag "edit_altitude"

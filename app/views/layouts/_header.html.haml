@@ -20,8 +20,17 @@
 					.menu_wrap
 						%ul.nav.sf-menu
 							%li.sub-menu
+								=link_to "Marcas", brands_path
+								%ul
+									%li
+										= link_to "Crear Marca", new_brand_registration_path
+							%li.sub-menu
 								=link_to "Cupones", root_path 
 								%ul
+									%li
+										=link_to new_coupon_path do 
+											%span --
+											Crear nuevo cupón
 									%li
 										=link_to pending_coupons_path do 
 											%span --

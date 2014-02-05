@@ -1,0 +1,9 @@
+%h1
+	Editar
+	= (@brand.name.nil? || @brand.name.empty?) ? "Marca" : @brand.name
+
+=render "form"
+
+%ul
+	%li
+		=link_to "volver", brands_path

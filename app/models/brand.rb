@@ -20,4 +20,12 @@ class Brand < ActiveRecord::Base
 	}, 
 	path: ":rails_root/public/system/:class/:attachment/:id/:style/:filename",
 	url: "/system/:class/:attachment/:id/:style/:filename"
+
+	def safe_name
+		if name.nil? || name.empty?
+			"Nombre no registrado"
+		else
+			name
+		end
+	end
 end
