@@ -1,4 +1,4 @@
 - branches.each do |branch|
 	=check_box_tag "coupon[branch_ids][]", branch.id, coupon.branch_ids.include?(branch.id), id: dom_id(branch)
-	=label_tag dom_id(branch), branch.district.name + " - " + branch.district.city.name, class: "district_checkbox"
+	=label_tag dom_id(branch), branch.address + " - " + branch.district.name + " / " + branch.district.city.name, class: "district_checkbox"
 	%br

@@ -1,6 +1,5 @@
 .page_container
-	%h6
-		=link_to "Tu cuponera virtual", "#"
+	= render "brands/everywhere_logo", current_brand: current_brand, message: ""
 	.inner_content
 		#options
 			%ul#filters.option-set{ data: {"option-key" => "filter"}}

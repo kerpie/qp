@@ -1,7 +1,9 @@
-%h1 Nuevo Cupón
+.page_container
+	= render "brands/everywhere_logo", current_brand: current_brand, message: ""
+	%h1 Nuevo Cupón
 
-=render "form"
+	=render "form"
 
-%ul
-	%li
-		=link_to "Volver", coupons_path
+	%ul
+		%li
+			=link_to "Volver", coupons_path

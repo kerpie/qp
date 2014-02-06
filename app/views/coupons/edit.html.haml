@@ -1,18 +1,20 @@
-%h1
-	Editar Cupon
+.page_container
+	= render "brands/everywhere_logo", current_brand: current_brand, message: "Editando cupon"
+	%h1
+		Editar Cupon
 
-=render "form"
+	=render "form"
 
-%ul
-	%li
-		=link_to "volver", coupons_path
+	%ul
+		%li
+			=link_to "volver", coupons_path
 
--content_for :ready_scripts do
-	:javascript
-		$(document).ready(function(){
-			var discount = $("#coupon_discount").val();
-			if(discount.length > 0){
-				discount *= 100;
-				$("#coupon_discount").val(discount);
-			}
-		});
+	-content_for :ready_scripts do
+		:javascript
+			$(document).ready(function(){
+				var discount = $("#coupon_discount").val();
+				if(discount.length > 0){
+					discount *= 100;
+					$("#coupon_discount").val(discount);
+				}
+			});

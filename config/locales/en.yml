@@ -25,3 +25,7 @@ en:
     submit:
       create: "Crear"
       update: "Confirmar cambios"
+  activerecord:
+    errors:
+      messages:
+        taken: " ya ha sido utilizado"

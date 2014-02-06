@@ -1,7 +1,7 @@
 #error_explanation{
 	width: 70%;
 	margin: 0 auto 20px;
-	background: red;
+	background: #c0392b;
 	color: white;
 	text-align: center;
 	border-radius: 5px;
@@ -12,6 +12,7 @@
 	}
 	ul li{
 		font-size: 15px;
+		padding-bottom: 10px
 	}
 }
 
@@ -24,6 +25,16 @@
 #new_brand, #edit_brand, #new_user, #edit_user{
 	.sign_in_brand_part, .register_brand_part, .edit_brand_part, .sign_in_user_part, .register_user_part, .edit_user_part{
 		text-align: center;
+		.to_show{
+			display: none;
+			margin-bottom: 10px;
+		}
+	}
+	.hide_until_click{
+		display: none;
+	}
+	#important_part, #link_to_change_password{
+		margin-bottom: 10px;
 	}
 	.brand_logo{
 		margin: 10px 0px 15px;

@@ -7,7 +7,7 @@
 	-if brand_signed_in?
 		=f.hidden_field "brand_id", value: current_brand.id
 	.part
-		=f.label :name, "Nombre: "
+		=f.label :name, "Titulo del cupón: "
 		=f.text_field :name
 	.part
 		=f.label :description, "Descripción: "

@@ -2,7 +2,7 @@
 	.accordion-heading
 		=link_to "#branch_#{br.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion2", id: "#{br.id}"} do
 			%i.icon-bookmark
-			= "Tienda #{index}"
+			= "Tienda #{index} - #{br.address}"
 	.accordion-body.collapse{ id: "branch_#{br.id}"}
 		.accordion-inner
 			%ul

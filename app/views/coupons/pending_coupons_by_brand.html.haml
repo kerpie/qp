@@ -1,6 +1,5 @@
 .page_container
-	%h6
-		=link_to "Cupones pendientes", "#"
+	= render "brands/everywhere_logo", current_brand: current_brand, message: "Cupones pendientes"
 	.inner_content
 		#options
 			%ul#filters.option-set{ data: {"option-key" => "filter"}}
