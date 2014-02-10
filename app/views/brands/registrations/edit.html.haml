@@ -30,6 +30,14 @@
         Actualmente esperando confirmación de: 
         =resource.unconfirmed_email
 
+    .edit_brand_part 
+      = f.label :fb_link, "Perfil de Facebook:"
+      = f.text_field :fb_link
+
+    .edit_brand_part 
+      = f.label :tw_link, "Perfil de Twitter:"
+      = f.text_field :tw_link
+
     .edit_brand_part
       = f.label :current_password do
         Contraseña actual:

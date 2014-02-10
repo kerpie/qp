@@ -36,4 +36,11 @@ class CitiesController < ApplicationController
 			format.js
 		end
 	end
+
+	def search_districts_for_city
+		@districts = City.find(params[:city_id]).districts
+		respond_to do |format|
+			format.js
+		end
+	end
 end

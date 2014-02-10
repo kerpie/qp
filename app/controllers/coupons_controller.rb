@@ -3,14 +3,20 @@ class CouponsController < ApplicationController
   before_action :set_coupon, only: [:show, :edit, :update, :destroy]
 
   def index
-  	@coupons = Coupon.where(coupon_state: CouponState.where("name like ?", "%prob%").first)
+  	@coupons = Coupon.where("coupon_state_id == ? AND end_date < ?", CouponState.last.id, DateTime.now)
   	@coupon_types = CouponType.all
   end
 
   def new
     @coupon = Coupon.new
+    @cities = []
+    if brand_signed_in?
+      current_brand.branches.each do |branch|
+        @cities << branch.district.city
+      end
+      @cities.uniq!
+    end
     respond_to do |format|
-      
       unless admin_signed_in?
         #Brand session started
         unless current_brand.branches.count>0
@@ -52,7 +58,7 @@ if brand_signed_in?
 
   def show
     if user_signed_in?
-      current_user.coupon_ids = @coupon.id
+      current_user.coupons << @coupon unless current_user.coupons.exists?(@coupon) 
     end
   end
 
@@ -82,7 +88,11 @@ if brand_signed_in?
   def published_coupons
     @brand = Brand.find(params[:id])
     @coupons = @brand.coupons.where(coupon_state_id: CouponState.where("name like ?", "%prob%").first.id)
-    @coupon_types = CouponType.all
+    @coupon_types = []
+    @brand.coupons.each do |coupon|
+      @coupon_types << coupon.coupon_type
+    end
+    @coupon_types.uniq!
     respond_to do |format|
       format.html
     end
@@ -146,6 +156,8 @@ if brand_signed_in?
         :coupon_state_id, 
         :brand_id,
         :promo_image, 
+        :start_date_string,
+        :end_date_string,
         {:branch_ids=>[]})
   	end
 end

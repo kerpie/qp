@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130224245) do
+ActiveRecord::Schema.define(version: 20140210153348) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140130224245) do
     t.integer  "brand_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "brands", force: true do |t|
@@ -83,6 +84,8 @@ ActiveRecord::Schema.define(version: 20140130224245) do
     t.string   "logo_image_content_type"
     t.integer  "logo_image_file_size"
     t.datetime "logo_image_updated_at"
+    t.string   "fb_link"
+    t.string   "tw_link"
   end
 
   add_index "brands", ["email"], name: "index_brands_on_email", unique: true

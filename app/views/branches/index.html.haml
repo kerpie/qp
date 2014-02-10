@@ -28,6 +28,9 @@
 					=hidden_field_tag "altitude"
 					=hidden_field_tag "latitude"	
 					.new_branch_part
+						= label_tag "name", "Nombre: "
+						= text_field_tag "name"
+					.new_branch_part
 						= label_tag "address", "Dirección: "
 						= text_field_tag "address"
 					.new_branch_part
@@ -76,6 +79,9 @@
 					=hidden_field_tag "edit_longitude"
 					=hidden_field_tag "edit_altitude"
 					=hidden_field_tag "edit_latitude"
+					.new_branch_part
+						= label_tag "edit_name", "Nombre: "
+						= text_field_tag "edit_name"
 					.new_branch_part
 						= label_tag "edit_address", "Dirección: "
 						= text_field_tag "edit_address"

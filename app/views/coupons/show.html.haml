@@ -15,8 +15,7 @@
 
 -unless @coupon.nil?
 	.page_container
-		%h6
-			=link_to "Tu cuponera virtual", "#"
+		= render "brands/everywhere_logo", current_brand: current_brand, message: @coupon.name
 		.inner_content		
 			.row
 				.span4
@@ -33,12 +32,21 @@
 						%li
 							Fin de Promocion:
 							=@coupon.end_date.strftime("%d/%m/%y")
-						%li
-							Descuento:
-							= sprintf("%.0f", @coupon.discount*100) + "%"
+						- unless @coupon.discount? || @coupon.discount <= 0 
+							%li
+								Descuento:
+								= sprintf("%.0f", @coupon.discount*100) + "%"
 						%li
 							Marca:
 							= (@coupon.brand.name.nil? || @coupon.brand.name.empty?) ? "---" : @coupon.brand.name
+						- if @coupon.brand.fb_link?
+							%li
+								Facebook: 
+								= link_to @coupon.brand.fb_link
+						- if @coupon.brand.tw_link?
+							%li
+								Twitter: 
+								= link_to @coupon.brand.tw_link
 						%li
 							Disponibilidad de la promocion:
 							= coupon_locations(@coupon.branches)
@@ -54,7 +62,7 @@
 						.pad25
 				.span8{ style: "margin-top:14px;" }
 					- if @coupon.promo_image?
-						=link_to "#", data:{ rel: "prettyPhoto[portfolio1]" } do
+						=link_to @coupon.promo_image.url, data:{ rel: "prettyPhoto[portfolio1]" } do
 							=image_tag @coupon.promo_image.url, alt: ""
 
 		-if brand_signed_in?

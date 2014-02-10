@@ -11,15 +11,15 @@
 		=f.text_field :name
 	.part
 		=f.label :description, "Descripción: "
-		=f.text_area :description
+		=f.text_area :description, cols: 40, rows: 10
 	.part
-		=f.label :start_date, "Fecha de inicio de promoción:"
-		=f.date_select :start_date, use_month_names: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], start_year: 2013, order: [:day, :month, :year]
+		=f.label :start_date_string, "Fecha de inicio de promoción: "
+		=f.date_field :start_date_string
 	.part
-		=f.label :end_date, "Fecha de fin de promoción:"
-		=f.date_select :end_date, use_month_names: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], start_year: 2013, order: [:day, :month, :year]
+		=f.label :end_date_string, "Fecha de fin de promoción: "
+		=f.date_field :end_date_string
 	.part
-		=f.label :discount, "Descuento (en %):"
+		=f.label :discount, "Descuento (en %): (Si es cero por favor escriba 0)"
 		=f.text_field :discount
 		#discount_error
 			%span#discount_error_message
@@ -27,8 +27,13 @@
 		.part
 			%h2
 				¿Dónde estará disponible este cupón?
+			%br
+				= select_tag "city_to_search", options_from_collection_for_select(@cities, :id, :name)
+				= select_tag "district_to_search"
+
 				= hidden_field_tag "coupon[branch_ids][]", nil
-			= render "branches_item", branches: current_brand.branches, coupon: @coupon
+			.branches_in_district
+				= render "branches_item", branches: current_brand.branches, coupon: @coupon
 	-if admin_signed_in?
 		.part
 			=f.label "brand_id", "Tienda: "

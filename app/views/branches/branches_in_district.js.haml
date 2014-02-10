@@ -1,0 +1,4 @@
+- if @branches.count > 0 
+	$(".branches_in_district").html("#{j render 'coupons/branches_item', branches: @branches, coupon: @coupon}");
+- else
+	$(".branches_in_district").html("<h2>No existen tiendas para este distrito</h2>");

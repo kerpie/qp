@@ -23,6 +23,7 @@ jQuery ->
 
 		branch_id = $(parent).find(".accordion-toggle").data("id")
 
+		name = $(parent).find(".name").text().trim()
 		address = $(parent).find(".address").text().trim()
 		reference = $(parent).find(".reference").text().trim()
 		
@@ -42,6 +43,7 @@ jQuery ->
 		altitude = $(parent).find(".altitude").text().trim()
 
 		$("#branch_id").val(branch_id)
+		$("#edit_name").val(name)
 		$("#edit_address").val(address)
 		$("#edit_reference").val(reference)
 

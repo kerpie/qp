@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  def after_sign_in_path_for(resource)
+    if resource_class == Brand
+      coupons_published_path(current_brand.id)
+    else
+      root_path
+    end
+  end
 end

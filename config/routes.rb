@@ -28,6 +28,7 @@ Qp::Application.routes.draw do
   post 'cities/create' => "cities#create", as: :cities_create
   post 'cities/update' => "cities#update", as: :cities_update
   get 'cities/destroy/:id' => "cities#destroy", as: :cities_destroy
+  post 'cities/search_districts_for_city' => "cities#search_districts_for_city", as: :search_districts_for_city
 
   #District
   post 'districts/create' => "districts#create", as: :districts_create
@@ -61,6 +62,7 @@ Qp::Application.routes.draw do
   get "branches/destroy/:id" => "branches#destroy", as: :destroy_branch
   post "branches/edit" => "branches#edit", as: :edit_branch
   post "branches/grouped_branches" => "branches#grouped_branches", as: :grouped_branches
+  post "branches/branches_in_district" => "branches#branches_in_district"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

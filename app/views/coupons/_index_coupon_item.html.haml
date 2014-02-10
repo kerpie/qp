@@ -1,13 +1,15 @@
 .span4.element{ class: "#{coupon.coupon_type.name}", data: { category: "#{coupon.coupon_type.name}" } }
 	.hover_img
-		-if coupon.promo_image?
-			=image_tag coupon.promo_image.url, alt: ""
-		-else
-			=image_tag "portfolio/1.jpg", alt: ""
-		%span.portfolio_zoom
-			=link_to "", coupon.promo_image.url, {data: {rel: "prettyPhoto[portfolio1]"}}
+		= link_to coupon do
+			-if coupon.promo_image?
+				=image_tag coupon.promo_image.url, alt: ""
+			-else
+				=image_tag "portfolio/1.jpg", alt: ""
+		/
+			%span.portfolio_zoom
+				=link_to "View item", coupon
 		%span.portfolio_link
-			=link_to "View item", coupon
+			=link_to "", coupon.promo_image.url, {data: {rel: "prettyPhoto[portfolio1]"}}
 	.item_description
 		=link_to coupon do
 			%b

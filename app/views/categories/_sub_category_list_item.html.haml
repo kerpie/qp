@@ -28,4 +28,4 @@
 				%td
 					Editar
 				%td
-					=link_to "Eliminar", sub_categories_destroy_path(sb.id), remote: true, class: "destroy_sb"
+					=link_to "Eliminar", sub_categories_destroy_path(sb.id), remote: true, class: "destroy_sb",  data: { confirm: "Una vez eliminado no podra recuperarse. Está seguro de continuar?"}

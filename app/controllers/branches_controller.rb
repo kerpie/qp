@@ -9,6 +9,7 @@ class BranchesController < ApplicationController
 
   	@branch = Branch.new
   	@branch.brand = Brand.find(params[:brand_id])
+    @branch.name = params[:name]
   	@branch.address = params[:address]
   	@branch.reference = params[:reference]
   	@branch.start_hour = params[:start_hour]
@@ -39,6 +40,7 @@ class BranchesController < ApplicationController
   def edit
     @branch = Branch.find(params[:branch_id])
     @branch.brand = Brand.find(params[:brand_id])
+    @branch.name = params[:edit_name]
     @branch.address = params[:edit_address]
     @branch.reference = params[:edit_reference]
     @branch.start_hour = params[:edit_start_hour]
@@ -66,6 +68,15 @@ class BranchesController < ApplicationController
 
     @coupon = (params[:c_id].nil? || params[:c_id].empty?) ? Coupon.new : Coupon.find(params[:c_id])
 
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def branches_in_district
+    @brand = Brand.find(params[:brand_id])
+    @branches = @brand.branches.where(district_id: params[:district_id])
+    @coupon = (params[:coupon_id] == "-1") ? Coupon.new : Coupon.find(params[:coupon_id])
     respond_to do |format|
       format.js
     end
