@@ -38,6 +38,8 @@ Qp::Application.routes.draw do
   #Coupons
   get 'coupons/history' => "coupons#history", as: :coupons_history
   get 'coupons/published_coupons/:id' => "coupons#published_coupons", as: :coupons_published
+  get 'coupons/category/:id' => "coupons#by_category", as: :coupons_by_category
+  get 'coupons/sub_category/:id' => "coupons#by_sub_category", as: :coupons_by_sub_category
   get 'coupons/saved_coupons/:id' => "coupons#saved_coupons", as: :saved_coupons
   get 'coupons/pending_coupons/:id' => "coupons#pending_coupons_by_brand", as: :pending_coupons_by_brand
   get 'coupons/pending_coupons' => "coupons#pending_coupons", as: :pending_coupons

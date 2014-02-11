@@ -136,7 +136,14 @@ if brand_signed_in?
     respond_to do |format|
       format.js
     end
+  end
 
+  def by_category
+    @category = Category.find(params[:id])
+  end
+
+  def by_sub_category
+    @sub_category = SubCategory.find(params[:id])
   end
 
   private

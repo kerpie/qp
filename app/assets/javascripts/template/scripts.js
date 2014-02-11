@@ -8,7 +8,7 @@ $(document).ready(function(){
 	$("<option />", {
 	   "selected": "selected",
 	   "value"   : "",
-	   "text"    : "choose a page"
+	   "text"    : "Elige una pagina"
 	}).appendTo("nav#main_menu select");	
 	
 	// Populate dropdowns with the first menu items
@@ -19,6 +19,23 @@ $(document).ready(function(){
 	    	"text"    : el.text()
 	 	}).appendTo("nav#main_menu select");
 	});
+
+	$("<select />").appendTo("#categories_container");
+	
+	$("<option />", {
+	   "selected": "selected",
+	   "value"   : "",
+	   "text"    : "Elige una categoria o subcategoria"
+	}).appendTo("#categories_container select");	
+
+	$("#categories_list li a").each(function() {
+	 	var el = $(this);
+	 	$("<option />", {
+	     	"value"   : el.attr("href"),
+	    	"text"    : el.text()
+	 	}).appendTo("#categories_container select");
+	});
+
 	
 /***************************************************
 	RESPONSIVE MENU
@@ -27,6 +44,10 @@ $(document).ready(function(){
     	window.location = $(this).find("option:selected").val();
   	});
 	
+  	$("#categories_container select").change(function() {
+    	window.location = $(this).find("option:selected").val();
+  	});
+
 /***************************************************
 	IFRAME
 ***************************************************/

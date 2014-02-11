@@ -52,3 +52,49 @@
     border-color: #2d5073;
     background-color: #3b5998;
 }
+
+#categories_list{
+	width: 100%;
+	margin: 0 auto;
+	li{
+		float: left;
+		width: 25%;
+		position: relative;
+		a{
+			padding: 10px 0px;
+			text-align: center;
+			display: block;
+		}
+		ul.second_list{
+			display: none;
+			position: absolute;
+			width: 100%;
+			padding: 0px;
+			z-index: 10;
+			li{
+				clear: both;
+				width: 100%;
+				color: #999999;
+				background: #222222;
+				&:hover{
+					background: #F96E5B;
+					a{
+						color: white;
+					}
+				}
+				.third_list{
+					display: none;
+				}
+			}
+		}
+		&:hover{
+			ul.second_list{
+				display: block;
+			}
+		}
+	}
+}
+
+.page_container{
+	clear: both;
+}

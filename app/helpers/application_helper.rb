@@ -17,4 +17,9 @@ module ApplicationHelper
 		@devise_mapping ||= Devise.mappings[:user]
 	end
 
+	def categories
+		@categories = Category.all
+		render "layouts/categories", categories: @categories
+	end
+
 end

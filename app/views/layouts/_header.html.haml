@@ -17,50 +17,50 @@
 					/
 						menu
 					%nav#main_menu
-					.menu_wrap
-						%ul.nav.sf-menu
-							%li.sub-menu
-								=link_to "Marcas", brands_path
-								%ul
-									%li
-										= link_to "Crear Marca", new_brand_registration_path
-							%li.sub-menu
-								=link_to "Cupones", root_path 
-								%ul
-									%li
-										=link_to new_coupon_path do 
-											%span --
-											Crear nuevo cupón
-									%li
-										=link_to pending_coupons_path do 
-											%span --
-											Ver Cupones pendientes de aprobacion
-							%li.sub-menu
-								=link_to "Administrar", "#"
-								%ul
-									%li
-										=link_to categories_index_path do 
-											%span --
-											Categorias y subcategorias de Tiendas
-									%li
-										=link_to cities_index_path do 
-											%span --
-											Ciudades y distritos
-									%li
-										=link_to coupon_states_index_path do 
-											%span --
-											Estados de Cupones
-									%li
-										=link_to coupon_types_index_path do 
-											%span --
-											Tipos de Cupones
-							%li.sub-menu
-								=link_to "Cerrar Sesión", destroy_admin_session_path, method: :delete
-								%ul
-									%li
-										=link_to edit_admin_registration_path do
-											%span --
-											Editar perfil de administrador
+						.menu_wrap
+							%ul.nav.sf-menu
+								%li.sub-menu
+									=link_to "Marcas", brands_path
+									%ul
+										%li
+											= link_to "Crear Marca", new_brand_registration_path
+								%li.sub-menu
+									=link_to "Cupones", root_path 
+									%ul
+										%li
+											=link_to new_coupon_path do 
+												%span --
+												Crear nuevo cupón
+										%li
+											=link_to pending_coupons_path do 
+												%span --
+												Ver Cupones pendientes de aprobacion
+								%li.sub-menu
+									=link_to "Administrar", "#"
+									%ul
+										%li
+											=link_to categories_index_path do 
+												%span --
+												Categorias y subcategorias de Tiendas
+										%li
+											=link_to cities_index_path do 
+												%span --
+												Ciudades y distritos
+										%li
+											=link_to coupon_states_index_path do 
+												%span --
+												Estados de Cupones
+										%li
+											=link_to coupon_types_index_path do 
+												%span --
+												Tipos de Cupones
+								%li.sub-menu
+									=link_to "Cerrar Sesión", destroy_admin_session_path, method: :delete
+									%ul
+										%li
+											=link_to edit_admin_registration_path do
+												%span --
+												Editar perfil de administrador
 			- elsif brand_signed_in?
 				/
 					Usuario Tienda
@@ -68,70 +68,70 @@
 					/
 						menu
 					%nav#main_menu
-					.menu_wrap
-						%ul.nav.sf-menu
-							%li
-								#represent_logo
-									-if current_brand.logo_image?
-										= current_brand.name? ? link_to(current_brand.name) : "No hay un nombre registrado"
-							%li.sub-menu
-								=link_to "Cupones", coupons_path
-								%ul
-									%li
-										=link_to new_coupon_path do
-											%span --
-											Nuevo cupón
-									%li
-										=link_to saved_coupons_path(current_brand.id) do
-											%span --
-											Ver cupones guardados
-									%li
-										=link_to coupons_published_path(current_brand.id) do 
-											%span --
-											Ver cupones aprobados
-									%li
-										=link_to pending_coupons_by_brand_path(current_brand.id) do 
-											%span --
-											Ver cupones pendientes
-							%li
-								=link_to "Tiendas", branches_index_path(current_brand.id)
-							%li.sub-menu
-								=link_to "Cerrar sesión", destroy_brand_session_path, method: :delete
-								%ul
-									%li
-										=link_to edit_brand_registration_path do
-											%span --
-											Editar Perfil
+						.menu_wrap
+							%ul.nav.sf-menu
+								%li
+									#represent_logo
+										-if current_brand.logo_image?
+											= current_brand.name? ? link_to(current_brand.name) : "No hay un nombre registrado"
+								%li.sub-menu
+									=link_to "Cupones", coupons_path
+									%ul
+										%li
+											=link_to new_coupon_path do
+												%span --
+												Nuevo cupón
+										%li
+											=link_to saved_coupons_path(current_brand.id) do
+												%span --
+												Ver cupones guardados
+										%li
+											=link_to coupons_published_path(current_brand.id) do 
+												%span --
+												Ver cupones aprobados
+										%li
+											=link_to pending_coupons_by_brand_path(current_brand.id) do 
+												%span --
+												Ver cupones pendientes
+								%li
+									=link_to "Tiendas", branches_index_path(current_brand.id)
+								%li.sub-menu
+									=link_to "Cerrar sesión", destroy_brand_session_path, method: :delete
+									%ul
+										%li
+											=link_to edit_brand_registration_path do
+												%span --
+												Editar Perfil
 			- elsif user_signed_in?
 				.span8
 					/
 						Usuario normal
 					%nav#main_menu
-					.menu_wrap
-						%ul.nav.sf-menu
-							%li
-								=link_to "Cupones Visitados", coupons_history_path
-							%li.sub-menu
-								=link_to "Cerrar sesión", destroy_user_session_path, method: :delete
-								%ul
-									%li
-										=link_to edit_user_registration_path do
-											%span --
-											Editar Perfil
+						.menu_wrap
+							%ul.nav.sf-menu
+								%li
+									=link_to "Cupones Visitados", coupons_history_path
+								%li.sub-menu
+									=link_to "Cerrar sesión", destroy_user_session_path, method: :delete
+									%ul
+										%li
+											=link_to edit_user_registration_path do
+												%span --
+												Editar Perfil
 			- else
 				.span8
 					/
 						Sin sesion
 					%nav#main_menu
-					.menu_wrap
-						%ul.nav.sf-menu
-							%li.sub-menu
-								/
-									=link_to "Iniciar sesión", "#user_session", class: "btn", role: "button", data: {toggle: "modal"}
-									=link_to "Iniciar sesión", new_user_session_path
-								=link_to "Iniciar sesión", "#start_session", data: {toggle: "modal", role: "button"}
-								%ul
-									%li
-										=link_to new_brand_session_path do
-											%span --
-											Iniciar sesión como local comercial
+						.menu_wrap
+							%ul.nav.sf-menu
+								%li.sub-menu
+									/
+										=link_to "Iniciar sesión", "#user_session", class: "btn", role: "button", data: {toggle: "modal"}
+										=link_to "Iniciar sesión", new_user_session_path
+									=link_to "Iniciar sesión", "#start_session", data: {toggle: "modal", role: "button"}
+									%ul
+										%li
+											=link_to new_brand_session_path do
+												%span --
+												Iniciar sesión como local comercial

@@ -1,0 +1,22 @@
+#categories_container
+	%ul#categories_list
+		%li
+			=link_to "Todas las categorias", "#"
+			%ul.second_list
+				-categories.each do |category|
+					%li
+						= link_to category.name, coupons_by_category_path(category.id)
+						-if category.sub_categories.count > 0 
+							%ul.third_list
+								- category.sub_categories.each do |sub_category|
+									%li
+										= link_to sub_category.name, coupons_by_sub_category_path(sub_category.id)
+
+		-categories.first(3).each do |category|
+			%li 
+				= link_to category.name, coupons_by_category_path(category.id)
+				-if category.sub_categories.count > 0 
+					%ul.second_list
+						- category.sub_categories.each do |sub_category|
+							%li
+								= link_to sub_category.name, coupons_by_sub_category_path(sub_category.id)

@@ -201,10 +201,17 @@ iframe{ width: 100%;  }
 }
 .menu_wrap .nav > li:first-child {
 }
+
 #main_menu select {
 	display: none;
 	font-size:12px;
 }
+
+#categories_container select{
+	display: none;
+	font-size:12px;	
+}
+
 .menu_wrap .nav li a {
 	line-height:18px;
 	color:#444 !important; 
@@ -1071,6 +1078,8 @@ input[type="text"]:focus,
 #main_menu { float:none; }
 nav#main_menu ul {display: none; }
 nav#main_menu select { display: inline-block; width: 100% !important; margin-top:10px;}
+#categories_container ul{ display: none}
+#categories_container select { display: inline-block; width: 100% !important; margin-top:10px;}
 .menu_wrap { float:none;}
 .header .span4, .header .span8 { float:none; text-align:center; }
 .foot_right_block { margin-top:15px;}
