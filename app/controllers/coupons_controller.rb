@@ -3,7 +3,7 @@ class CouponsController < ApplicationController
   before_action :set_coupon, only: [:show, :edit, :update, :destroy]
 
   def index
-  	@coupons = Coupon.where("coupon_state_id == ? AND end_date < ?", CouponState.last.id, DateTime.now)
+  	@coupons = Coupon.where("coupon_state_id == ? AND start_date < ? AND end_date > ?", CouponState.last.id, DateTime.now, DateTime.now)
   	@coupon_types = CouponType.all
   end
 
