@@ -142,9 +142,11 @@ if brand_signed_in?
     @coupon_types = CouponType.all
     @brands = Category.brands_by_category(params[:id])
     @coupons = []
-    @brands.each do |brand|
-      brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?",CouponState.last.id, Date.today, Date.today).each do |coupon|
-        @coupons << coupon 
+    unless @brands.nil?
+      @brands.each do |brand|
+        brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?",CouponState.last.id, Date.today, Date.today).each do |coupon|
+          @coupons << coupon 
+        end
       end
     end
   end
@@ -153,9 +155,11 @@ if brand_signed_in?
     @coupon_types = CouponType.all
     @brands = SubCategory.brands_by_sub_category(params[:id])
     @coupons = []
-    @brands.each do |brand|
-      brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?",CouponState.last.id, Date.today, Date.today).each do |coupon|
-        @coupons << coupon 
+    unless @brands.nil?
+      @brands.each do |brand|
+        brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?",CouponState.last.id, Date.today, Date.today).each do |coupon|
+          @coupons << coupon 
+        end
       end
     end
   end
