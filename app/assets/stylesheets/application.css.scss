@@ -90,6 +90,11 @@
 		&:hover{
 			ul.second_list{
 				display: block;
+				li:hover{
+					ul.third_list{
+						display: block;
+					}
+				}
 			}
 		}
 	}

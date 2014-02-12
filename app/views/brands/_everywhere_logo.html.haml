@@ -4,8 +4,8 @@
 			-if current_brand.logo_image?
 				=image_tag current_brand.logo_image.url(:small)
 			-if message.empty?
-				=link_to current_brand.name, "#", style: "position: relative; top: 10px;"
+				=link_to "", "#", style: "position: relative; top: 10px;"
 			-else 
-				=link_to current_brand.name + " / #{message}", "#", style: "position: relative; top: 10px;"
+				=link_to " / #{message}", "#", style: "position: relative; top: 10px;"
 	-else
 		=link_to "Tu cuponera virtual", "#"

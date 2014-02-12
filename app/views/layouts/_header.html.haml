@@ -70,10 +70,6 @@
 					%nav#main_menu
 						.menu_wrap
 							%ul.nav.sf-menu
-								%li
-									#represent_logo
-										-if current_brand.logo_image?
-											= current_brand.name? ? link_to(current_brand.name) : "No hay un nombre registrado"
 								%li.sub-menu
 									=link_to "Cupones", coupons_path
 									%ul
