@@ -27,6 +27,6 @@ class BrandsController < ApplicationController
   end
 
   def brand_params
-    params.require(:brand).permit(:name, :email, :fb_link, :tw_link, :logo_image)
+    params.require(:brand).permit(:name, :email, :fb_link, :tw_link, :logo_image, {:sub_category_ids => []})
   end
 end

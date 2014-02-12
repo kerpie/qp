@@ -39,6 +39,20 @@
       = f.text_field :tw_link
 
     .edit_brand_part
+      =label_tag "categories_in_edit_brand","Seleccione las categorias en las que quiera participar: "
+      =select_tag "categories_in_edit_brand", options_from_collection_for_select(Category.all, :id, :name)
+      =hidden_field_tag "brand[sub_category_ids][]", nil
+
+    .edit_brand_part#sub_categories_go_here
+      - Category.all.each do |category|
+        .sub_category{id: "category_#{category.id}"}
+          %ul
+            - category.sub_categories.each do |sub_category|
+              %li
+                =check_box_tag "brand[sub_category_ids][]", sub_category.id, current_brand.sub_category_ids.include?(sub_category.id), id: dom_id(sub_category)
+                =label_tag dom_id(sub_category), sub_category.name, class: "sub_category_checkbox"
+
+    .edit_brand_part{style: "clear: both;"}
       = f.label :current_password do
         Contraseña actual:
         %i 

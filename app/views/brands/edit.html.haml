@@ -1,9 +1,10 @@
-%h1
-	Editar
-	= (@brand.name.nil? || @brand.name.empty?) ? "Marca" : @brand.name
+.page_container
+	%h1
+		Editar
+		= (@brand.name.nil? || @brand.name.empty?) ? "Marca" : @brand.name
 
-=render "form"
+	=render "form"
 
-%ul
-	%li
-		=link_to "volver", brands_path
+	%ul
+		%li
+			=link_to "volver", brands_path
