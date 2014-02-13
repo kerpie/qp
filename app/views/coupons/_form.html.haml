@@ -28,8 +28,8 @@
 			%h2
 				¿Dónde estará disponible este cupón?
 			%br
-				= select_tag "city_to_search", options_from_collection_for_select(@cities, :id, :name)
-				= select_tag "district_to_search"
+				= select_tag "city_to_search", options_from_collection_for_select(@cities, :id, :name), prompt: "Elige una ciudad"
+				= select_tag "district_to_search", prompt: "Elige un distrito"
 
 				= hidden_field_tag "coupon[branch_ids][]", nil
 			.branches_in_district

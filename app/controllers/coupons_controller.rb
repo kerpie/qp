@@ -125,7 +125,7 @@ if brand_signed_in?
 
   def history
     @coupon_types = CouponType.all
-    @coupons = current_user.coupons
+    @coupons = current_user.coupons.reverse
   end
 
   def pending_coupons

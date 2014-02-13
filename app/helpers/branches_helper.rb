@@ -3,7 +3,7 @@ module BranchesHelper
 	def attention_time(time_of_day)
 		hour_options = ""
 		24.times do |i|
-			hour_options = hour_options + "<option value=\"#{i*5}\">#{i*5}</option>"
+			hour_options = hour_options + "<option value=\"#{i}\">#{i}</option>"
 		end
 		minutes_options = ""
 		12.times do |i|

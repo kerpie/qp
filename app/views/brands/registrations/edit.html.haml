@@ -40,7 +40,7 @@
 
     .edit_brand_part
       =label_tag "categories_in_edit_brand","Seleccione las categorias en las que quiera participar: "
-      =select_tag "categories_in_edit_brand", options_from_collection_for_select(Category.all, :id, :name)
+      =select_tag "categories_in_edit_brand", options_from_collection_for_select(Category.all, :id, :name), prompt: "Elige una categoría"
       =hidden_field_tag "brand[sub_category_ids][]", nil
 
     .edit_brand_part#sub_categories_go_here

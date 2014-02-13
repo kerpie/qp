@@ -39,14 +39,15 @@
 						%li
 							Marca:
 							= (@coupon.brand.name.nil? || @coupon.brand.name.empty?) ? "---" : @coupon.brand.name
-						- if @coupon.brand.fb_link?
+						- if @coupon.brand.fb_link? || @coupon.brand.tw_link?
 							%li
-								Facebook: 
-								= link_to @coupon.brand.fb_link
-						- if @coupon.brand.tw_link?
-							%li
-								Twitter: 
-								= link_to @coupon.brand.tw_link
+								#social_links_go_here
+									-if @coupon.brand.fb_link?
+										=link_to @coupon.brand.fb_link, class: "social_link" do
+											=image_tag "facebook_logo.png"
+									-if @coupon.brand.tw_link?
+										=link_to @coupon.brand.tw_link, class: "social_link" do
+											=image_tag "twitter_logo.png"
 						%li
 							Disponibilidad de la promocion:
 							= coupon_locations(@coupon.branches)
