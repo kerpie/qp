@@ -14,7 +14,7 @@ class CouponsController < ApplicationController
       current_brand.branches.each do |branch|
         @cities << branch.district.city
       end
-      @cities.uniq!
+      @cities.uniq! unless @cities.count == 1
     end
     respond_to do |format|
       unless admin_signed_in?
@@ -63,6 +63,13 @@ if brand_signed_in?
   end
 
   def edit
+    @cities = []
+    if brand_signed_in?
+      current_brand.branches.each do |branch|
+        @cities << branch.district.city
+      end
+      @cities.uniq! unless @cities.count == 1
+    end
   end
 
   def update
