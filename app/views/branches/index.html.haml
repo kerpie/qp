@@ -114,50 +114,59 @@
 						Cancelar
 					=submit_tag "Actualizar", class: "btn btn-primary"
 
-	- content_for :ready_scripts do
-		:javascript
-			$(document).ready(function(){
-				var map = new GMaps({
-					div: "#map_canvas",
-					lat: -12.043333,
-					lng: -77.028333,
-					click: function(e){
-						map.removeMarkers();
-						map.addMarker({
-							lat: e.latLng.lat(), 
+		- content_for :ready_scripts do
+			:javascript
+				$(document).ready(function(){
+					var map = new GMaps({
+						div: "#map_canvas",
+						lat: -12.043333,
+						lng: -77.028333,
+						click: function(e){
+							map.removeMarkers();
+							map.addMarker({
+							lat: e.latLng.lat(),
 							lng: e.latLng.lng()
 						});
 						$("#longitude").val(e.latLng.lng());
 						$("#latitude").val(e.latLng.lat());
-					}
-				});
-
-				$("#map_canvas").attr("style","width: 100%; height: 350px;");
-
-				$(".accordion-group").click(function(){
-					var latitude = parseFloat($(this).find(".latitude").text().trim())
-					var longitude = parseFloat($(this).find(".longitude").text().trim())
-					
-					var edit_map = new GMaps({
-						div: "#map_canvas_edit",
-						lat: latitude,
-						lng: longitude,
-						click: function(e){
-							edit_map.removeMarkers();
-							edit_map.addMarker({
-								lat: e.latLng.lat(), 
-								lng: e.latLng.lng()
-							});
-							$("#edit_longitude").val(e.latLng.lng());
-							$("#edit_latitude").val(e.latLng.lat());
 						}
 					});
-					
-					edit_map.addMarker({
-						lat: latitude,
-						lng: longitude
+
+					$("#map_canvas").attr("style","width: 100%; height: 350px;");
+
+					$("#new_branch_for_this_brand").on("shown", function(){
+						map.refresh();
 					});
 
-					$("#map_canvas_edit").attr("style","width: 100%; height: 350px;");
+					$(".accordion-group").click(function(){
+						var latitude = parseFloat($(this).find(".latitude").text().trim())
+						var longitude = parseFloat($(this).find(".longitude").text().trim())
+
+						var edit_map = new GMaps({
+							div: "#map_canvas_edit",
+							lat: latitude,
+							lng: longitude,
+							click: function(e){
+								edit_map.removeMarkers();
+								edit_map.addMarker({
+									lat: e.latLng.lat(),
+									lng: e.latLng.lng()
+								});
+								$("#edit_longitude").val(e.latLng.lng());
+								$("#edit_latitude").val(e.latLng.lat());
+							}
+						});
+
+						edit_map.addMarker({
+							lat: latitude,
+							lng: longitude
+						});
+
+						$("#edit_branch_for_this_brand").on("shown", function(){
+							edit_map.refresh();
+							edit_map.setCenter(latitude, longitude, function(){});
+						});
+
+						$("#map_canvas_edit").attr("style","width: 100%; height: 350px;");
+					});
 				});
-			});

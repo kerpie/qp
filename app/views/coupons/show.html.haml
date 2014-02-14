@@ -82,15 +82,15 @@
 	:javascript
 		$(document).ready(function(){
 			var map = new GMaps({
-				div: "#locations_map", 
+				div: "#locations_map",
 				lat: $("#coupon_locations option:first").data("lat"),
 				lng: $("#coupon_locations option:first").data("lng"),
 			});
 
 			map.addMarker({
-					lat: $("#coupon_locations option:first").data("lat"),
-					lng: $("#coupon_locations option:first").data("lng")
-				});
+				lat: $("#coupon_locations option:first").data("lat"),
+				lng: $("#coupon_locations option:first").data("lng")
+			});
 
 			map.setCenter($("#coupon_locations option:first").data("lat"),$("#coupon_locations option:first").data("lng"), function(){});
 
@@ -104,5 +104,6 @@
 				});
 				map.setCenter($("#coupon_locations option:selected").data("lat"), $("#coupon_locations option:selected").data("lng"), function(){});
 			});
+
+			map.refresh();
 		});
-	
