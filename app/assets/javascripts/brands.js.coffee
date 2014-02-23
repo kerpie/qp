@@ -25,7 +25,4 @@ $ ->
 
 $ ->
   $("#categories_in_edit_brand").change ->
-    $("#sub_categories_go_here").show()
-    $(".sub_category").each ->
-      $(this).hide()
-    $("#category_" + $(this).val()).show()
+    $("#category_" + $(this).val()).modal('show')

@@ -9,6 +9,9 @@ class Coupon < ActiveRecord::Base
 	has_many :histories
 	has_many :users, through: :histories
 
+	has_many :coupon_categorizations
+	has_many :sub_categories, through: :coupon_categorizations
+
 	has_attached_file :promo_image, styles: {
 			medium: "300x300>",
 			small: "100x100>"

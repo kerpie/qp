@@ -43,6 +43,7 @@ Qp::Application.routes.draw do
   get 'coupons/saved_coupons/:id' => "coupons#saved_coupons", as: :saved_coupons
   get 'coupons/pending_coupons/:id' => "coupons#pending_coupons_by_brand", as: :pending_coupons_by_brand
   get 'coupons/pending_coupons' => "coupons#pending_coupons", as: :pending_coupons
+  get 'coupons/valid_coupons' => "coupons#valid_coupons", as: :valid_coupons
   post 'coupons/approve_coupon/:id' => "coupons#approve_coupon", as: :approve_coupon
   resources :coupons
 

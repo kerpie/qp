@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource_class == Brand
-      coupons_published_path(current_brand.id)
+      valid_coupons_path
     else
       root_path
     end

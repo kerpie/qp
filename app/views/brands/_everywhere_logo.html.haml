@@ -2,7 +2,8 @@
 	-if brand_signed_in? && current_brand.name?
 		#represent_logo
 			-if current_brand.logo_image?
-				=image_tag current_brand.logo_image.url(:small)
+				=link_to valid_coupons_path do
+					=image_tag current_brand.logo_image.url(:small)
 			-if message.empty?
 				=link_to "", "#", style: "position: relative; top: 10px;"
 			-else 

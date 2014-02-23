@@ -45,12 +45,29 @@
 
     .edit_brand_part#sub_categories_go_here
       - Category.all.each do |category|
-        .sub_category{id: "category_#{category.id}"}
-          %ul
-            - category.sub_categories.each do |sub_category|
-              %li
-                =check_box_tag "brand[sub_category_ids][]", sub_category.id, current_brand.sub_category_ids.include?(sub_category.id), id: dom_id(sub_category)
-                =label_tag dom_id(sub_category), sub_category.name, class: "sub_category_checkbox"
+        .modal.hide.fade{id:"category_#{category.id}",  tabindex: "-1", role: "dialog", aria: {labelledby: "myModalLabel", hidden: "true"}}
+          .modal-header
+            %button{ type: "button", class: "close", data: {dismiss: "modal"},aria:{hidden: "true"}}
+              ×
+            %h3#myModalLabel
+              = category.name
+          .modal-body
+            %ul
+              - category.sub_categories.each do |sub_category|
+                %li
+                  =check_box_tag "brand[sub_category_ids][]", sub_category.id, current_brand.sub_category_ids.include?(sub_category.id), id: dom_id(sub_category)
+                  =label_tag dom_id(sub_category), sub_category.name, class: "sub_category_checkbox"
+          .model-footer
+            .modal-footer
+              %button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
+                Cancelar
+              =submit_tag "Actualizar", class: "btn btn-primary"
+          /
+            %ul
+              - category.sub_categories.each do |sub_category|
+                %li
+                  =check_box_tag "brand[sub_category_ids][]", sub_category.id, current_brand.sub_category_ids.include?(sub_category.id), id: dom_id(sub_category)
+                  =label_tag dom_id(sub_category), sub_category.name, class: "sub_category_checkbox"
 
     .edit_brand_part{style: "clear: both;"}
       = f.label :current_password do

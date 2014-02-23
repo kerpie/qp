@@ -1,7 +1,7 @@
 #new_coupon, .edit_coupon{
 	.part{
 		margin: 5px 0px;
-		.district_checkbox{
+		.district_checkbox, .coupon_categorization_checkbox{
 			width: 40%;
 			display: inline-block;
 			padding: 5px;
@@ -10,6 +10,9 @@
 		}
 		textarea{
 			width: 50%;
+		}
+		#image_preview{
+			display: none;
 		}
 	}
 	.file_part{
@@ -63,5 +66,50 @@ ul.icons li{
 		img{
 			display:inline-block;
 		}
+	}
+}
+
+.brand_name_space_in_coupon{
+	position: absolute;
+	z-index: 10;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	background: rgba(0,0,0,0.5);
+	h4{
+		position: relative;
+		width: 100%;
+		color: white;
+		text-align: center;
+	}
+}
+
+.branch_address_goes_here{
+	padding: 0px 0px 10px;
+}
+
+#coupon_creation_confirmation{
+	.modal-body{
+		.confirmation_part{
+			p{
+				.confirmation_title{
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+#regular_link{
+	float: right;
+}
+#accept_creation_part{
+	float: left;
+	label{
+		float: right;
+		margin-left: 5px;
+		position: relative;
+		top: 2px;
 	}
 }

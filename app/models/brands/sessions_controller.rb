@@ -6,5 +6,4 @@ class Brands::SessionsController < Devise::SessionsController
 			set_flash_message :notice, :signed_in_with_incompleted_data
 		end		
 	end
-
 end

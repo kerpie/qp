@@ -9,12 +9,16 @@
 		%li
 			=link_to "volver", coupons_path
 
-	-content_for :ready_scripts do
-		:javascript
-			$(document).ready(function(){
-				var discount = $("#coupon_discount").val();
-				if(discount.length > 0){
-					discount *= 100;
-					$("#coupon_discount").val(discount);
-				}
-			});
+-content_for :ready_scripts do
+	:javascript
+		$(document).ready(function(){
+			$("#coupon_start_date_string").datepicker();
+			$("#coupon_end_date_string").datepicker();
+			$("#coupon_start_date_string").val("#{@coupon.start_date.strftime("%m/%d/%Y")}")
+			$("#coupon_end_date_string").val("#{@coupon.end_date.strftime("%m/%d/%Y")}")
+		});
+
+-content_for :custom_libraries do
+	- if brand_signed_in? || admin_signed_in?
+		=javascript_include_tag "http://code.jquery.com/ui/1.10.4/jquery-ui.js"
+		=stylesheet_link_tag "http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"

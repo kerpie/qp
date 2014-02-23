@@ -29,6 +29,12 @@
 			.new_city_part
 				=label_tag :name, "Ciudad: "
 				=text_field_tag :name
+			.new_city_part
+				=label_tag :latitude, "Latitud: "
+				=text_field_tag :latitude
+			.new_city_part
+				=label_tag :longitude, "Longitud: "
+				=text_field_tag :longitude
 		.modal-footer
 			%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
 				Cancelar
@@ -46,6 +52,12 @@
 			.new_category_part
 				=label_tag :new_name, "Ciudad: "
 				=text_field_tag :new_name
+			.new_category_part
+				=label_tag :new_latitude, "Latitud: "
+				=text_field_tag :new_latitude
+			.new_category_part
+				=label_tag :new_longitude, "Longitud: "
+				=text_field_tag :new_longitude
 		.modal-footer
 			%button#close_button.btn{data: {dismiss: "modal"}, aria: {hidden: "true"}}
 				Cancelar

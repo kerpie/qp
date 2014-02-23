@@ -25,7 +25,7 @@
 										%li
 											= link_to "Crear Marca", new_brand_registration_path
 								%li.sub-menu
-									=link_to "Cupones", root_path 
+									=link_to "Cupones", pending_coupons_path 
 									%ul
 										%li
 											=link_to new_coupon_path do 
@@ -71,7 +71,7 @@
 						.menu_wrap
 							%ul.nav.sf-menu
 								%li.sub-menu
-									=link_to "Cupones", coupons_path
+									=link_to "Cupones", valid_coupons_path
 									%ul
 										%li
 											=link_to new_coupon_path do

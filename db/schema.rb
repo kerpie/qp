@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210153348) do
+ActiveRecord::Schema.define(version: 20140222182207) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -107,6 +107,13 @@ ActiveRecord::Schema.define(version: 20140210153348) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "coupon_categorizations", force: true do |t|
+    t.integer  "coupon_id"
+    t.integer  "sub_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

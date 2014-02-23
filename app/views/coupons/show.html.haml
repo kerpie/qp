@@ -51,6 +51,8 @@
 						%li
 							Disponibilidad de la promocion:
 							= coupon_locations(@coupon.branches)
+						%li.branch_address_goes_here
+						%li
 							#locations_map
 					.pad25
 					/
@@ -103,7 +105,10 @@
 					lng: $("#coupon_locations option:selected").data("lng")
 				});
 				map.setCenter($("#coupon_locations option:selected").data("lat"), $("#coupon_locations option:selected").data("lng"), function(){});
+
+				$(".branch_address_goes_here").html("Direccion: " + $(this).data("address"));
 			});
 
+			$(".branch_address_goes_here").html("Direccion: " + $("#coupon_locations options:first").data("address"));
 			map.refresh();
 		});

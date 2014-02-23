@@ -9,23 +9,13 @@
 			=link_to "Volver", coupons_path
 
 	=hidden_field_tag "is_new_coupon", @coupon.id? ? @coupon.id : "-1"
+
 -content_for :ready_scripts do
 	- if brand_signed_in? || admin_signed_in?
 		:javascript
 			$(document).ready(function(){
-				if($("#city_to_search").length == 1){
-					$.ajax({
-			          type: "POST",
-			          url: "/cities/search_districts_for_city", 
-			          data: {
-			            city_id: $("#city_to_search").val(),
-			          }
-			        });
-				}
-
-			$("#coupon_start_date_string").datepicker();
-			$("#coupon_end_date_string").datepicker();
-
+				$("#coupon_start_date_string").datepicker();
+				$("#coupon_end_date_string").datepicker();
 			});
 
 -content_for :custom_libraries do

@@ -9,12 +9,18 @@ class CouponsController < ApplicationController
 
   def new
     @coupon = Coupon.new
-    @cities = []
     if brand_signed_in?
+      @cities = []
       current_brand.branches.each do |branch|
         @cities << branch.district.city
       end
       @cities.uniq! unless @cities.count == 1
+
+      @categories = []
+      current_brand.sub_categories.each do |sub_category|
+        @categories << sub_category.category
+      end
+      @categories.uniq! unless @categories.count == 1
     end
     respond_to do |format|
       unless admin_signed_in?
@@ -44,7 +50,6 @@ if brand_signed_in?
     end
 =end
 
-
   	respond_to do |format|
   		if @coupon.save
   			format.html { redirect_to @coupon, notice: "cupon creado" }
@@ -58,17 +63,25 @@ if brand_signed_in?
 
   def show
     if user_signed_in?
-      current_user.coupons << @coupon unless current_user.coupons.exists?(@coupon) 
+      if current_user.coupons.exists?(@coupon) 
+        current_user.histories.where(coupon_id: @coupon.id).first.destroy
+      end
+      current_user.coupons << @coupon 
     end
   end
 
   def edit
-    @cities = []
     if brand_signed_in?
+      @cities = []
       current_brand.branches.each do |branch|
         @cities << branch.district.city
       end
       @cities.uniq! unless @cities.count == 1
+      @categories = []
+      current_brand.sub_categories.each do |sub_category|
+        @categories << sub_category.category
+      end
+      @categories.uniq! unless @categories.count == 1
     end
   end
 
@@ -90,6 +103,11 @@ if brand_signed_in?
   		format.html { redirect_to coupons_path }
   		format.json { head :no_content }
   	end
+  end
+
+  def valid_coupons
+    @coupons = current_brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?", CouponState.last.id, DateTime.now, DateTime.now)
+    @coupon_types = CouponType.all
   end
 
   def published_coupons
@@ -190,6 +208,7 @@ if brand_signed_in?
         :promo_image, 
         :start_date_string,
         :end_date_string,
-        {:branch_ids=>[]})
+        {:branch_ids=>[]}, 
+        {:sub_category_ids => []})
   	end
 end

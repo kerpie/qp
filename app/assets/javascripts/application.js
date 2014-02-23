@@ -14,6 +14,10 @@
 //= require jquery_ujs
 //= require_directory .
 
+$("#start_session").on('shown', function(){
+	$("#user_email").focus();
+});
+
 $(".close").click(function(){
 	$(this).parents(".system_message").hide();
 });
