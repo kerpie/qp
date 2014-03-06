@@ -79,10 +79,30 @@ jQuery ->
 			$("#coupon_creation_confirmation").modal 'hide'
 
 jQuery ->
+	$(".edit_coupon").submit (event)->
+		if send_form == false && $("#coupon_coupon_state_id  option:last").is(":selected")
+			$("#confirmation_title_value").text($("#coupon_name").val())
+			$("#confirmation_description_value").text $("#coupon_description").val()
+			$("#confirmation_start_date_value").text $("#coupon_start_date_string").val()
+			branches = ""
+			$(".branches_in_district").find(".district_checkbox").each ->
+				label = $(this)
+				if $(label).prev().is(":checked")
+					branches += "<li>" + $(label).text() + "</li>"
+			$("#confirmation_availability").html branches
+			$("#confirmation_end_date_value").text $("#coupon_end_date_string").val()
+			$("#confirmation_coupon_type_value").text $("#coupon_coupon_type_id option:selected").text()
+			$("#coupon_creation_confirmation").modal 'show'
+			event.preventDefault()
+		else 
+			$("#coupon_creation_confirmation").modal 'hide'		
+
+jQuery ->
 	$("#confirm_coupon_creation").click (event)->
 		if $("#accept_creation_checkbox").is(":checked")
 			send_form = true;
 			$("#new_coupon").submit()
+			$(".edit_coupon").submit()
 		else
 			alert "Tiene que aceptar los TOS para poder continuar"
 		event.preventDefault()

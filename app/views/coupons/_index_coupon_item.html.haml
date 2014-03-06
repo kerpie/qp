@@ -8,9 +8,6 @@
 				=image_tag coupon.promo_image.url, alt: ""
 			-else
 				=image_tag "portfolio/1.jpg", alt: ""
-		/
-			%span.portfolio_zoom
-				=link_to "View item", coupon
 		%span.portfolio_link
 			=link_to "", coupon.promo_image.url, {data: {rel: "prettyPhoto[portfolio1]"}}
 	.item_description

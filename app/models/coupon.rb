@@ -23,7 +23,9 @@ class Coupon < ActiveRecord::Base
 
 	#Validations
 
-	validates :name, :description, :discount, presence: { message: " no puede estar vacío"}
+	validates :name, presence: { message: " no puede estar vacío"}
+	validates :description, presence: { message: " no puede estar vacío"}
+	validates :discount, presence: { message: " no puede estar vacío"}
 	
 	attr_accessor :start_date_string
 	attr_accessor :end_date_string
@@ -37,6 +39,10 @@ class Coupon < ActiveRecord::Base
 		unless self.start_date_string.nil? || self.start_date_string == ''
 			self.end_date = DateTime.strptime self.end_date_string, "%m/%d/%Y"
 		end
+	end
+
+	def is_valid?
+		start_date <= Time.zone.now.beginning_of_day && end_date >= Time.zone.now.end_of_day
 	end
 
 end

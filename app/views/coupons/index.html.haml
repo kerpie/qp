@@ -10,7 +10,23 @@
 						=link_to ct.name, "#filter", data: { option_value: ".#{ct.name}" }
 			.clear
 		.row
-			.projects
-				- @coupons.each do |cp|
-					=render "index_coupon_item", coupon: cp
-			.clear
+			.span3
+				%h4.categories-title
+					Categorías 
+				#accordion2.accordion
+					- @categories.each do |category|
+						.accordion-group
+							.accordion-heading
+								= link_to category.name, "##{category.name}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion2"}
+							.accordion-body.collapse{id: "#{category.name}"}
+								.accordion-inner
+									%ul
+										- category.sub_categories.each do |sub|
+											%li
+												= link_to sub.name, coupons_by_sub_category_path(sub.id)
+			.span9
+				.projects
+					- 10.times do 
+						- @coupons.each do |cp|
+							=render "index_coupon_item", coupon: cp
+				.clear

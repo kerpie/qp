@@ -106,14 +106,18 @@
 						.menu_wrap
 							%ul.nav.sf-menu
 								%li
+									=link_to "Mis favoritos", favorite_coupons_path
+								%li
 									=link_to "Cupones Visitados", coupons_history_path
 								%li.sub-menu
-									=link_to "Cerrar sesión", destroy_user_session_path, method: :delete
+									=link_to "Hola #{current_user.name? ? current_user.name : 'Hola usuario' }", "#"
 									%ul
 										%li
 											=link_to edit_user_registration_path do
 												%span --
 												Editar Perfil
+										%li
+											= link_to "Cerrar sesión", destroy_user_session_path, method: :delete
 			- else
 				.span8
 					/

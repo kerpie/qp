@@ -1,9 +1,10 @@
 class CouponsController < ApplicationController
 
   before_action :set_coupon, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_values, only: [:index, :by_category, :by_sub_category, :favorites]
+  
   def index
-  	@coupons = Coupon.where("coupon_state_id == ? AND start_date < ? AND end_date > ?", CouponState.last.id, DateTime.now, DateTime.now)
+  	@coupons = Coupon.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
   	@coupon_types = CouponType.all
   end
 
@@ -63,10 +64,13 @@ if brand_signed_in?
 
   def show
     if user_signed_in?
+      value = false
       if current_user.coupons.exists?(@coupon) 
-        current_user.histories.where(coupon_id: @coupon.id).first.destroy
+        h = current_user.histories.where(coupon_id: @coupon.id).first
+        value = h.is_favorite
+        h.destroy
       end
-      current_user.coupons << @coupon 
+      @history = History.create(user_id: current_user.id, coupon_id: @coupon.id, is_favorite: value)
     end
   end
 
@@ -86,6 +90,18 @@ if brand_signed_in?
   end
 
   def update
+    if brand_signed_in?
+      @cities = []
+      current_brand.branches.each do |branch|
+        @cities << branch.district.city
+      end
+      @cities.uniq! unless @cities.count == 1
+      @categories = []
+      current_brand.sub_categories.each do |sub_category|
+        @categories << sub_category.category
+      end
+      @categories.uniq! unless @categories.count == 1
+    end
   	respond_to do |format|
   		if @coupon.update(coupon_params)
   			format.html { redirect_to @coupon, notice: "cupon actualizado" }
@@ -106,7 +122,7 @@ if brand_signed_in?
   end
 
   def valid_coupons
-    @coupons = current_brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?", CouponState.last.id, DateTime.now, DateTime.now)
+    @coupons = current_brand.coupons.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
     @coupon_types = CouponType.all
   end
 
@@ -146,6 +162,24 @@ if brand_signed_in?
     @coupons = current_user.coupons.reverse
   end
 
+  def favorites
+    histories = History.where(user_id: current_user.id, is_favorite: true)
+    @coupons = []
+    histories.each do |h|
+      @coupons << h.coupon if h.coupon.is_valid?
+    end
+    @coupon_types = CouponType.all
+  end
+
+  def mark_favorite
+    history = History.where(user_id: params[:user_id], coupon_id: params[:coupon_id]).first
+    history.is_favorite = params[:is_favorite]
+    history.save
+    respond_to do |format|
+      format.html { redirect_to history.coupon }
+    end
+  end
+
   def pending_coupons
     @coupons = Coupon.where(coupon_state_id: CouponState.where("name like ?", "%pendi%"))
     @coupon_types = CouponType.all
@@ -164,28 +198,18 @@ if brand_signed_in?
   end
 
   def by_category
-    @coupon_types = CouponType.all
-    @brands = Category.brands_by_category(params[:id])
-    @coupons = []
-    unless @brands.nil?
-      @brands.each do |brand|
-        brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?", CouponState.last.id, DateTime.now, DateTime.now).each do |coupon|
-          @coupons << coupon 
-        end
+    @category = Category.find(params[:id])
+    @category.sub_categories.each do |sub|
+      @coupons = sub.coupons.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day).each do |coupon|
+        coupon
       end
     end
   end
 
   def by_sub_category
-    @coupon_types = CouponType.all
-    @brands = SubCategory.brands_by_sub_category(params[:id])
-    @coupons = []
-    unless @brands.nil? 
-      @brands.each do |brand|
-        brand.coupons.where("coupon_state_id == ? AND start_date < ? AND end_date > ?",CouponState.last.id, DateTime.now, DateTime.now).each do |coupon|
-          @coupons << coupon 
-        end
-      end
+    @sub_category = SubCategory.find(params[:id])
+    @coupons = @sub_category.coupons.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day).each do |coupon|
+      coupon
     end
   end
 
@@ -211,4 +235,9 @@ if brand_signed_in?
         {:branch_ids=>[]}, 
         {:sub_category_ids => []})
   	end
+
+    def set_values
+      @categories = Category.all
+      @coupon_types = CouponType.all
+    end
 end

@@ -29,7 +29,7 @@
 #approve_box{
 	width: 100%;
 	text-align: center;
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
@@ -70,15 +70,10 @@ ul.icons li{
 }
 
 .brand_name_space_in_coupon{
-	position: absolute;
-	z-index: 10;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	width: 100%;
 	background: rgba(0,0,0,0.5);
+	margin: -10px 0px;
 	h4{
-		position: relative;
+		display:block;
 		width: 100%;
 		color: white;
 		text-align: center;
@@ -112,4 +107,8 @@ ul.icons li{
 		position: relative;
 		top: 2px;
 	}
+}
+
+.branch_item, .sub_category_item{
+	display:none;
 }

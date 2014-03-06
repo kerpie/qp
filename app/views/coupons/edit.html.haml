@@ -14,8 +14,8 @@
 		$(document).ready(function(){
 			$("#coupon_start_date_string").datepicker();
 			$("#coupon_end_date_string").datepicker();
-			$("#coupon_start_date_string").val("#{@coupon.start_date.strftime("%m/%d/%Y")}")
-			$("#coupon_end_date_string").val("#{@coupon.end_date.strftime("%m/%d/%Y")}")
+			$("#coupon_start_date_string").val("#{@coupon.start_date.strftime("%m/%d/%Y") unless @coupon.start_date.nil?}")
+			$("#coupon_end_date_string").val("#{@coupon.end_date.strftime("%m/%d/%Y") unless @coupon.start_date.nil?}")
 		});
 
 -content_for :custom_libraries do

@@ -1,18 +1,3 @@
-/
-	- unless notice.nil? || notice.empty?
-		%p
-			=notice
-
-	%ul
-		%li
-			=link_to "Volver", coupons_path
-		%li
-			=link_to "Editar", edit_coupon_path(@coupon)
-		%li
-			=link_to "Borrar", @coupon, method: :delete, data: { confirm: "de veritaz?" }
-
-= @texto
-
 -unless @coupon.nil?
 	.page_container
 		= render "brands/everywhere_logo", current_brand: current_brand, message: @coupon.name
@@ -20,18 +5,18 @@
 			.row
 				.span4
 					%h3
-						=@coupon.name
+						=@coupon.name unless @coupon.name.nil? || @coupon.name.empty?
 					%p
-						=@coupon.description
+						=@coupon.description unless @coupon.description.nil? || @coupon.description.empty?
 					%h5
 						Mas datos
 					%ul.icons
 						%li
 							Inicio de Promocion: 
-							=@coupon.start_date.strftime("%d/%m/%y")
+							=@coupon.start_date.strftime("%d/%m/%y") unless @coupon.start_date.nil?
 						%li
 							Fin de Promocion:
-							=@coupon.end_date.strftime("%d/%m/%y")
+							=@coupon.end_date.strftime("%d/%m/%y") unless @coupon.end_date.nil?
 						- unless @coupon.discount? || @coupon.discount <= 0 
 							%li
 								Descuento:
@@ -67,6 +52,14 @@
 					- if @coupon.promo_image?
 						=link_to @coupon.promo_image.url, data:{ rel: "prettyPhoto[portfolio1]" } do
 							=image_tag @coupon.promo_image.url, alt: ""
+					- if user_signed_in?
+						.favorite_part
+							- text = @history.is_favorite ? "Desmarcar como favorito" : "Marcar como favorito"
+							= form_tag mark_favorite_path do
+								= hidden_field_tag "user_id", current_user.id
+								= hidden_field_tag "coupon_id", @coupon.id
+								= hidden_field_tag "is_favorite", !@history.is_favorite
+								= submit_tag text, class: "favorite btn btn-primary btn-small"
 
 		-if brand_signed_in?
 			.coupon_options_for_brand

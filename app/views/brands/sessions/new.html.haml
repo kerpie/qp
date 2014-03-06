@@ -1,25 +1,26 @@
-- unless alert.nil? || alert.empty?
-	%p.alert_message
-		= alert
+.page_container
+	- unless alert.nil? || alert.empty?
+		%p.alert_message
+			= alert
 
-%h2.register_title 
-	Inicio de sesión como Tienda Comercial
+	%h2.register_title 
+		Inicio de sesión como Tienda Comercial
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-	.sign_in_brand_part
-		= f.label :email, "Correo: "
-		= f.email_field :email, autofocus: true
+	= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+		.sign_in_brand_part
+			= f.label :email, "Correo: "
+			= f.email_field :email, autofocus: true
 
-	.sign_in_brand_part
-		= f.label :password, "Contraseña: "
-		= f.password_field :password
+		.sign_in_brand_part
+			= f.label :password, "Contraseña: "
+			= f.password_field :password
 
-	- if devise_mapping.rememberable?
-		.remember_part
-			= f.check_box :remember_me 
-			= f.label :remember_me, "Recordar sesión"
+		- if devise_mapping.rememberable?
+			.remember_part
+				= f.check_box :remember_me 
+				= f.label :remember_me, "Recordar sesión"
 
-	.submit_brand_part
-		= f.submit "Iniciar sesión"
+		.submit_brand_part
+			= f.submit "Iniciar sesión"
 
-= render "brands/shared/links"
+	= render "brands/shared/links"

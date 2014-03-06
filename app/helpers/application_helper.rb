@@ -18,8 +18,20 @@ module ApplicationHelper
 	end
 
 	def categories
+		coupons = []
+		History.all.each do |history|
+			coupons << history.coupon if history.coupon.is_valid?
+		end
+		@popular_categories = []
+		coupons.each do |coupon|
+			coupon.sub_categories.each do |sub|
+				@popular_categories << sub.category
+			end
+		end
+		@popular_categories.uniq! unless @popular_categories.count == 1
 		@categories = Category.all
-		render "layouts/categories", categories: @categories
+
+		render "layouts/categories", categories: @categories, popular_categories: @popular_categories
 	end
 
 end

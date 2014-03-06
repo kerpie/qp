@@ -1,19 +1,34 @@
 .page_container
 	.inner_content
-		- unless @coupons.empty?
-			#options
-				%ul#filters.option-set{ data: {"option-key" => "filter"}}
+		#options
+			%ul#filters.option-set{ data: {"option-key" => "filter"}}
+				%li
+					=link_to "All", "#filter", class: "selected", data: { option_value: "*" } 
+				- @coupon_types.each do |ct|
 					%li
-						=link_to "All", "#filter", class: "selected", data: { option_value: "*" } 
-					- @coupon_types.each do |ct|
-						%li
-							=link_to ct.name, "#filter", data: { option_value: ".#{ct.name}" }
-				.clear
-			.row
+						=link_to ct.name, "#filter", data: { option_value: ".#{ct.name}" }
+			.clear
+		.row
+			.span3
+				%h4.categories-title
+					Categorías 
+				#accordion2.accordion
+					- @categories.each do |category|
+						.accordion-group
+							.accordion-heading
+								= link_to category.name, "##{category.name}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion2"}
+							.accordion-body.collapse{id: "#{category.name}"}
+								.accordion-inner
+									%ul
+										- category.sub_categories.each do |sub|
+											%li
+												= link_to sub.name, coupons_by_sub_category_path(sub.id)
+			.span9
 				.projects
-					- @coupons.each do |cp|
-						=render "index_coupon_item", coupon: cp
+					- unless @coupons.empty?
+						- @coupons.each do |cp|
+							=render "index_coupon_item", coupon: cp
+					- else
+						%h2
+							No hay cupones registrados en esta subcategoría 
 				.clear
-		- else
-			%h2
-				No hay cupones registrados en esta sub-categoría 
