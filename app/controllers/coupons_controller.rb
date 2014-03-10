@@ -6,6 +6,7 @@ class CouponsController < ApplicationController
   def index
   	@coupons = Coupon.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
   	@coupon_types = CouponType.all
+    @most_visited_coupons = Coupon.most_visited
   end
 
   def new

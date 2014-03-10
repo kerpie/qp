@@ -45,4 +45,15 @@ class Coupon < ActiveRecord::Base
 		start_date <= Time.zone.now.beginning_of_day && end_date >= Time.zone.now.end_of_day
 	end
 
+	def self.most_visited
+		coupons = History.all.select(:coupon_id).uniq
+		array = []
+		if !coupons.empty? && coupons.count >= 2
+			coupons.first(2).each do |h|
+				array << h.coupon
+			end
+		end
+		array
+	end
+
 end

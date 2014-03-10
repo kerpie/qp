@@ -1,6 +1,24 @@
 .page_container
 	= render "brands/everywhere_logo", current_brand: current_brand, message: ""
 	.inner_content
+		- unless @most_visited_coupons.empty?
+			.row
+				.span12
+					#portfolio_carousel.carousel.slide
+						.carousel-inner
+							- @most_visited_coupons.each do |coupon|
+								- if coupon == @most_visited_coupons.first
+									.item.active
+										=link_to coupon do 
+											=image_tag coupon.promo_image.url
+								- else
+									.item
+										= link_to coupon do
+											=image_tag coupon.promo_image.url
+						=link_to '', "#portfolio_carousel", class: "left carousel-control", data: { slide: "prev" }
+						=link_to '', "#portfolio_carousel", class: "right carousel-control", data: { slide: "next" }
+						:javascript
+							$('#portfolio_carousel').carousel({pause: 'hover'});
 		#options
 			%ul#filters.option-set{ data: {"option-key" => "filter"}}
 				%li
@@ -10,7 +28,7 @@
 						=link_to ct.name, "#filter", data: { option_value: ".#{ct.name}" }
 			.clear
 		.row
-			.span3
+			.span2
 				%h4.categories-title
 					Categorías 
 				#accordion2.accordion
@@ -24,7 +42,7 @@
 										- category.sub_categories.each do |sub|
 											%li
 												= link_to sub.name, coupons_by_sub_category_path(sub.id)
-			.span9
+			.span10
 				.projects
 					- 10.times do 
 						- @coupons.each do |cp|
