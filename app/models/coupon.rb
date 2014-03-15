@@ -6,10 +6,10 @@ class Coupon < ActiveRecord::Base
 	has_many :availabilities
 	has_many :branches, through: :availabilities
 
-	has_many :histories
+	has_many :histories, dependent: :destroy
 	has_many :users, through: :histories
 
-	has_many :coupon_categorizations
+	has_many :coupon_categorizations, dependent: :destroy
 	has_many :sub_categories, through: :coupon_categorizations
 
 	has_attached_file :promo_image, styles: {

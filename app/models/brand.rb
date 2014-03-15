@@ -8,12 +8,12 @@ class Brand < ActiveRecord::Base
 			:trackable,
 			:validatable
 
-	has_many :categorizations
+	has_many :categorizations, dependent: :destroy
 	has_many :sub_categories, through: :categorizations
 	
-	has_many :branches
+	has_many :branches, dependent: :destroy
 
-	has_many :coupons
+	has_many :coupons, dependent: :destroy
 
 	has_attached_file :logo_image, styles: {
 		medium: "150x150>",
