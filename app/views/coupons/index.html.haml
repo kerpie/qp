@@ -1,24 +1,15 @@
+- unless @most_visited_coupons.empty?
+	%h4.pad15
+		Cupones mas vistos
+	%ul#carousel.elastislide-list
+		- @most_visited_coupons.each do |coupon|
+			%li
+				= link_to coupon.promo_image.url(:small), data: {rel: "prettyPhoto[portfolio1]"} do
+					= image_tag coupon.promo_image.url(:small), alt: ""
+	.clear
 .page_container
 	= render "brands/everywhere_logo", current_brand: current_brand, message: ""
 	.inner_content
-		- unless @most_visited_coupons.empty?
-			.row
-				.span12
-					#portfolio_carousel.carousel.slide
-						.carousel-inner
-							- @most_visited_coupons.each do |coupon|
-								- if coupon == @most_visited_coupons.first
-									.item.active
-										=link_to coupon do 
-											=image_tag coupon.promo_image.url
-								- else
-									.item
-										= link_to coupon do
-											=image_tag coupon.promo_image.url
-						=link_to '', "#portfolio_carousel", class: "left carousel-control", data: { slide: "prev" }
-						=link_to '', "#portfolio_carousel", class: "right carousel-control", data: { slide: "next" }
-						:javascript
-							$('#portfolio_carousel').carousel({pause: 'hover'});
 		#options
 			%ul#filters.option-set{ data: {"option-key" => "filter"}}
 				%li
@@ -31,7 +22,7 @@
 			.span2
 				%h4.categories-title
 					Categorías 
-				#accordion2.accordion
+				#accordion2.accordion.categories_in_index
 					- @categories.each do |category|
 						.accordion-group
 							.accordion-heading
@@ -44,7 +35,60 @@
 												= link_to sub.name, coupons_by_sub_category_path(sub.id)
 			.span10
 				.projects
-					- 10.times do 
-						- @coupons.each do |cp|
-							=render "index_coupon_item", coupon: cp
+					- @coupons.each do |cp|
+						=render "index_coupon_item", coupon: cp
 				.clear
+- content_for :custom_libraries do
+	:javascript
+		$('#carousel').elastislide();
+		$('a[data-rel]').each(function() {
+			$(this).attr('rel', $(this).attr('data-rel')).removeAttr('data-rel');
+		});
+- content_for :ready_scripts do
+	:javascript
+		$(function() {
+			var Page = (function() {
+				var $navArrows = $( '#nav-arrows' ).hide(),
+				$navDots = $( '#nav-dots' ).hide(),
+				$nav = $navDots.children( 'span' ),
+				$shadow = $( '#shadow' ).hide(),
+				slicebox = $( '#sb-slider' ).slicebox( {
+					onReady : function() {
+						$navArrows.show();
+						$navDots.show();
+						$shadow.show();
+					},
+					onBeforeChange : function( pos ) {
+						$nav.removeClass( 'nav-dot-current' );
+						$nav.eq( pos ).addClass( 'nav-dot-current' );
+					}
+				}),
+				init = function() {
+					initEvents();
+				},
+				initEvents = function() {
+				// add navigation events
+					$navArrows.children( ':first' ).on( 'click', function() {
+					slicebox.next();
+					return false;
+					} );
+					$navArrows.children( ':last' ).on( 'click', function() {
+						slicebox.previous();
+						return false;
+					} );
+					$nav.each( function( i ) {
+						$( this ).on( 'click', function( event ) {
+						var $dot = $( this );
+						if( !slicebox.isActive() ) {
+							$nav.removeClass( 'nav-dot-current' );
+							$dot.addClass( 'nav-dot-current' );
+							}
+							slicebox.jump( i + 1 );
+							return false;
+						} );
+					} );
+				};
+				return { init : init };
+			})();
+			Page.init();
+		});

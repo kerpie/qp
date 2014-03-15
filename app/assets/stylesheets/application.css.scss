@@ -115,3 +115,15 @@
 .page_container{
 	clear: both;
 }
+
+.no_hand:hover{
+	cursor: default;
+}
+
+.categories_in_index{
+	.accordion-group{
+		border: none;
+	    border-bottom: 1px solid #ddd;
+	    border-radius: 0px;
+	}
+}
