@@ -1,6 +1,6 @@
 #city_group.accordion-group
 	.accordion-heading
-		=link_to "#city_#{ct.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion3", id: "#{ct.id}", latitude: "#{ct.latitude}", longitude: "#{ct.longitude}"} do
+		=link_to "#city_#{ct.id}", class: "accordion-toggle", data: {toggle: "collapse", parent: "#accordion3", id: "#{ct.id}"} do
 			=ct.name.capitalize
 	.accordion-body.collapse{ id: "city_#{ct.id}"}
 		.accordion-inner

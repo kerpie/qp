@@ -15,8 +15,6 @@ class CitiesController < ApplicationController
 	def create
 		@city = City.new
 		@city.name = params[:name]
-		@city.latitude = params[:latitude]
-		@city.longitude = params[:longitude]
 		@city.save
 		respond_to do |format|
 			format.js
@@ -26,8 +24,6 @@ class CitiesController < ApplicationController
 	def update
 		@city = City.find(params[:city_id])
 		@city.name = params[:new_name]
-		@city.latitude = params[:new_latitude]
-		@city.longitude = params[:new_longitude]
 		@city.save
 		respond_to do |format|
 			format.js
