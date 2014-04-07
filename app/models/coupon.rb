@@ -48,8 +48,8 @@ class Coupon < ActiveRecord::Base
 	def self.most_visited
 		coupons = History.all.select(:coupon_id).uniq
 		array = []
-		if !coupons.empty? && coupons.count >= 2
-			coupons.first(2).each do |h|
+		if !coupons.empty? && coupons.count >= 1
+			coupons.each do |h|
 				array << h.coupon
 			end
 		end

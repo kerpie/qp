@@ -7,6 +7,10 @@ class CouponsController < ApplicationController
   	@coupons = Coupon.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
   	@coupon_types = CouponType.all
     @most_visited_coupons = Coupon.most_visited
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def new
@@ -72,6 +76,10 @@ if brand_signed_in?
         h.destroy
       end
       @history = History.create(user_id: current_user.id, coupon_id: @coupon.id, is_favorite: value)
+    end
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
 
