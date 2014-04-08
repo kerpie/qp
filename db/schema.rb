@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306103530) do
+ActiveRecord::Schema.define(version: 20140408135400) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20140306103530) do
     t.string   "provider"
     t.string   "uid"
     t.string   "fb_photo_url"
+    t.string   "session_token"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

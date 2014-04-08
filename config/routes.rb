@@ -2,6 +2,9 @@ Qp::Application.routes.draw do
 
   root "coupons#index"
 
+  #User
+  post "user/session_for_mobile" => "user#session_for_mobile", as: :session_for_mobile
+
   devise_for :admins
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" } 
 
