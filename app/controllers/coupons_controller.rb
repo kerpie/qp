@@ -220,6 +220,10 @@ if brand_signed_in?
     @coupons = @sub_category.coupons.where("coupon_state_id = ? AND start_date <= ? AND end_date >= ?", CouponState.last.id, Time.zone.now.beginning_of_day, Time.zone.now.end_of_day).each do |coupon|
       coupon
     end
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   private
