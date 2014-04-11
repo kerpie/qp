@@ -26,3 +26,8 @@ $ ->
 $ ->
   $("#categories_in_edit_brand").change ->
     $("#category_" + $(this).val()).modal('show')
+
+$ ->
+  $(".categories_choosen").click (e)->
+    e.preventDefault()
+    $(this).parents(".modal").modal("hide")
